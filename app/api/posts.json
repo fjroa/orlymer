@@ -1,0 +1,11 @@
+[
+  {
+    "uid": 1,
+    "nombre" : "Francisco Javier",
+    "apellido1": "Roa",
+    "apellido2": "López",
+    "ciudad": "Jaén",
+    "provincia": "Jaén",
+    "avatar":"../../images/535106-user_512x512.png"
+  }
+]

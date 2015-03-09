@@ -1,0 +1,27 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="ficha-service" attributes="fichas">
+  <template>
+    <link rel="stylesheet" href="ficha-service.css">
+    <core-ajax id="ajax"
+      auto
+      url="../../api/posts.json"
+      on-core-response="{{fichasCargadas}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+  <script>
+    (function () {
+      Polymer('ficha-service', {
+        created: function() {
+      this.fichas = [];
+        },
+      fichasCargadas: function() {
+        this.fichas = this.$.ajax.response.slice(0);
+          
+        }
+      });
+    })();
+  </script>
+</polymer-element>

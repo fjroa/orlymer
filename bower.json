@@ -1,0 +1,18 @@
+{
+  "name": "orlymer",
+  "version": "0.0.0",
+  "dependencies": {
+    "core-elements": "Polymer/core-elements#^0.5.1",
+    "paper-elements": "Polymer/paper-elements#^0.5.1",
+    "polymer": "Polymer/polymer#^0.5.4",
+    "google-youtube": "GoogleWebComponents/google-youtube#~1.0.6",
+    "Faker": "~2.1.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.2.3"
+  },
+  "resolutions": {
+    "core-component-page": "^0.5",
+    "polymer": "^0.5.4"
+  }
+}

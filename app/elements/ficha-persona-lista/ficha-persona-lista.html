@@ -1,0 +1,44 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../ficha-service/ficha-service.html">
+<link rel="import" href="../ficha-persona/ficha-persona.html">
+
+<polymer-element name="ficha-persona-lista" attributes="">
+
+  <template>
+    <link rel="stylesheet" href="ficha-persona-lista.css">
+      
+   <!-- <ficha-service id="service" fichas="{{fichas}}"></ficha-service>-->
+    <section flex horizontal wrap layout>
+      <template repeat="{{ficha in fichas}}">
+          <ficha-persona>
+            <img src="{{ficha.avatar}}">
+            <nombre>{{ficha.nombre}}</nombre>
+            <apellido1>{{ficha.apellido1}}</apellido1>
+            <apellido2>{{ficha.apellido2}}</apellido2>
+            <ciudad>{{ficha.ciudad}}</ciudad>
+            <provincia>{{ficha.provincia}}</provincia>  
+          </ficha-persona>    
+      </template>
+    </section>
+  </template>
+  <script src="../../../bower_components/Faker/build/build/faker.js"></script>    
+  <script>
+     Polymer({
+        get fichas() {
+            var data = [];
+            faker.locale = "es";
+            for(var i = 0; i < 100; i++) {
+                data.push({
+                    nombre: faker.name.firstName(),
+                    apellido1: faker.name.lastName(),
+                    apellido2: faker.name.lastName(),
+                    avatar: faker.image.avatar(),
+                    ciudad: faker.address.city(),
+                    provincia: faker.address.state()
+                });
+            }
+            return data;
+        }
+    });
+  </script>
+</polymer-element>

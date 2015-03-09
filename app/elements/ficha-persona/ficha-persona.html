@@ -1,0 +1,30 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../core-media-query/core-media-query.html">
+<link rel="import" href="../../../bower_components/core-style/core-style.html">
+
+<polymer-element name="ficha-persona" attributes="query" noscript>
+  <template>
+    <link rel="stylesheet" href="ficha-persona.css">
+    
+    <div layout vertical center flex>
+        <foto>
+            <content select="img"></content>
+        </foto>
+        <div horizontal center-justified layout>
+            <content select="nombre"></content>&nbsp;
+            <content select="apellido1"></content>&nbsp;
+            <content select="apellido2"></content>
+        </div>
+        <div horizontal center-justified layout>
+            <content select="ciudad"></content>
+            &nbsp;(&nbsp;<content select="provincia"></content>&nbsp;)
+        </div>
+    </div>
+    <content></content>
+  </template>
+  
+  <core-media-query
+      query="{{query}}"
+      queryMatches="{{smallScreen}}">
+  </core-media-query>  
+</polymer-element>

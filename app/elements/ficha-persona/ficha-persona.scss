@@ -1,0 +1,48 @@
+@mixin clip-path($clip) {
+  -webkit-clip-path: $clip;
+  -moz-clip-path: $clip;
+  -ms-clip-path: $clip;
+  clip-path: $clip;
+}
+
+:host {
+  display: inline-block;
+  background-color: white;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 100; 
+  width: calc(100 / 4% - 16px);
+  max-width: 250px;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+::content nombre, ::content apellido1, ::content apellido2 {
+  font-size: 1rem;
+  font-weight: 20;
+}
+
+::content ciudad, ::content provincia {
+  font-size: 0.7rem;
+  font-weight: 80;
+}
+
+::content provincia {
+  font-style: italic;
+}
+
+::content foto {
+    max-height: 70%;
+    @include clip-path(ellipse(100px 219px));
+    overflow: hidden;
+    background-color: white;
+}
+
+polyfill-next-selector { content: 'img'; }
+::content img {
+
+}
+
+paper-ripple {
+  color: #4285f4;
+}
