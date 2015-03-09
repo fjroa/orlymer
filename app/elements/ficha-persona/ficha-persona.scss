@@ -11,7 +11,7 @@
   padding: 10px;
   font-size: 1rem;
   font-weight: 100; 
-  width: calc(100 / 4% - 16px);
+  width: calc((100 / 8)% - 16px);
   max-width: 250px;
   max-height: 400px;
   overflow: hidden;
@@ -33,7 +33,7 @@
 
 ::content foto {
     max-height: 70%;
-    @include clip-path(ellipse(100px 219px));
+    @include clip-path(inset(10% 10% 10% 10% round 20%, 20%));
     overflow: hidden;
     background-color: white;
 }

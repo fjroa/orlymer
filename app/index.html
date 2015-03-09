@@ -23,6 +23,22 @@
   <template is="auto-binding" id="app">
 
     <core-drawer-panel>
+
+      <!-- Drawer -->
+      <core-header-panel drawer>
+
+        <!-- Drawer Toolbar -->
+        <core-toolbar>Orlymer</core-toolbar>
+
+        <!-- Drawer Content -->
+        <core-menu selected="principal">
+          <core-item label="principal" >Principal</core-item>
+          <core-item name="fichas">Orla</core-item>
+          <core-item label="camara">Camara</core-item>
+        </core-menu>
+
+      </core-header-panel>
+
       <!-- Main -->
       <core-header-panel main>
 
@@ -33,7 +49,7 @@
         </core-toolbar>
         <!-- Main Content -->
         <div flex>
-              <ficha-persona-lista></ficha-persona-lista>
+          <ficha-persona-lista hidden?="{{!editing}}"></ficha-persona-lista>
    
           <yo-greeting></yo-greeting>
           <p>You now have</p>
@@ -55,6 +71,14 @@
   <script src="/scripts/app.js"></script>
   <script src="../bower_components/typeahead-country/app/bower_components/platform/platform.js"></script>
   <!-- endbuild-->
+  <script>
+      var menu = document.querySelector('core-menu');
+      var list = document.querySelector('ficha-persona-lista');
+
+      tabs.addEventListener('core-select', function() {
+        list.show = menu.selected;
+      });
+  </script>
 </body>
 
 </html>
