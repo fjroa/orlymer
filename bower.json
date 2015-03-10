@@ -6,7 +6,11 @@
     "paper-elements": "Polymer/paper-elements#^0.5.1",
     "polymer": "Polymer/polymer#^0.5.4",
     "google-youtube": "GoogleWebComponents/google-youtube#~1.0.6",
-    "Faker": "~2.1.2"
+    "Faker": "~2.1.2",
+    "basic-framed-content": "basic-web-components/basic-framed-content#master",
+    "basic-list-box": "basic-web-components/basic-list-box#master",
+
+    "video-camera-element": "~0.1.3"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.2.3"
