@@ -49,22 +49,18 @@
         <div class="content">
             <core-pages id="pages" selected="{{route}}" valueattr="hash">
                   <section hash="principal">
-                      <ficha-persona-lista num="1">                            
-                            <nombre>Nombre</nombre>
-                            <apellido1>Apellido1</apellido1>
-                            <apellido2>Apellido2</apellido2>
-                            <ciudad>Ciudad</ciudad>
-                            <provincia>Provincia</provincia>  
-                            <img src="images/535106-user_512x512.png">
-                      </ficha-persona>    
+                     <ficha-persona-lista num="1">                         
+                      </ficha-persona>   
                   </section>
                   <section hash="fichas">
                     <ficha-persona-lista num="50"></ficha-persona-lista>
                   </section>
                   <section hash="camara" layout center>
-                    <video is="video-camera" id="camara" autoplay></video>
-                    <paper-button raised class="captura" on-tap="{{snapAction}}">Captura</paper-button>
-                    <canvas id="canvas"></canvas>  
+                       <cam-snap></cam-snap>
+                       <div id="result">
+                        <h3>Last Image</h3>
+                        <img id="pic"></img>
+                      </div>
                   </section>
             </core-pages>
         </div>
@@ -75,7 +71,6 @@
 
   <!-- build:js /scripts/app.js -->
   <script src="/scripts/app.js"></script>
-  <script src="../bower_components/typeahead-country/app/bower_components/platform/platform.js"></script>
   <!-- endbuild-->
 </body>
 

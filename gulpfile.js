@@ -9,18 +9,34 @@ var browserSync = require('browser-sync');
 var pagespeed = require('psi');
 var reload = browserSync.reload;
 var merge = require('merge-stream');
+var path = require('path');
 
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
+var styleTask = function (stylesPath, srcs) {
+  return gulp.src(srcs.map(function(src) {
+      return path.join('app', stylesPath, src);
+    }))
+    .pipe($.changed(stylesPath, {extension: '.scss'}))
+    .pipe($.rubySass({
+        style: 'expanded',
+        precision: 10
+      })
+      .on('error', console.error.bind(console))
+    )
+    .pipe($.autoprefixer())
+    .pipe(gulp.dest('.tmp/' + stylesPath))
+    .pipe($.if('*.css', $.cssmin()))
+    .pipe(gulp.dest('dist/' + stylesPath))
+    .pipe($.size({title: stylesPath}));
+};
+
+// Compile and Automatically Prefix Stylesheets
+gulp.task('styles', function () {
+  return styleTask('styles', ['**/*.css', '*.scss']);
+});
+
+gulp.task('elements', function () {
+  return styleTask('elements', ['**/*.css', '**/*.scss']);
+});
 
 // Lint JavaScript
 gulp.task('jshint', function () {
@@ -78,46 +94,46 @@ gulp.task('fonts', function () {
     .pipe($.size({title: 'fonts'}));
 });
 
-// Compile and Automatically Prefix Stylesheets
-gulp.task('styles', function () {
-  return gulp.src([
-      'app/styles/**/*.css',
-      'app/styles/*.scss'
-    ])
-    .pipe($.changed('styles', {extension: '.scss'}))
-    .pipe($.rubySass({
-        style: 'expanded',
-        precision: 10
-      })
-      .on('error', console.error.bind(console))
-    )
-    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest('.tmp/styles'))
-    // Concatenate And Minify Styles
-    .pipe($.if('*.css', $.cssmin()))
-    .pipe(gulp.dest('dist/styles'))
-    .pipe($.size({title: 'styles'}));
-});
 
-gulp.task('elements', function () {
-  return gulp.src([
-    'app/elements/**/*.css',
-    'app/elements/**/*.scss'
-    ])
-    .pipe($.changed('elements', {extension: '.scss'}))
-    .pipe($.rubySass({
-        style: 'expanded',
-        precision: 10
-      })
-      .on('error', console.error.bind(console))
-    )
-    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest('.tmp/elements'))
-    // Concatenate And Minify Styles
-    .pipe($.if('*.css', $.cssmin()))
-    .pipe(gulp.dest('dist/elements'))
-    .pipe($.size({title: 'elements'}));
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
@@ -152,7 +168,8 @@ gulp.task('vulcanize', function () {
   return gulp.src('dist/elements/elements.vulcanized.html')
     .pipe($.vulcanize({
       dest: DEST_DIR,
-      strip: true
+      strip: true,
+      inline: true
     }))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: 'vulcanize'}));
@@ -180,7 +197,7 @@ gulp.task('serve', ['styles', 'elements'], function () {
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/elements/**/*.{scss,css}'], ['elements', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['jshint']);
+  gulp.watch(['app/{scripts,elements}/**/*.js'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -218,9 +235,10 @@ gulp.task('pagespeed', function (cb) {
   }, cb);
 });
 
-// Load tasks for web-component-tester
-// Adds tasks for `gulp test:local` and `gulp test:remote`
-try { require('web-component-tester').gulp.init(gulp); } catch (err) {}
+
+
+
+
 
 // Load custom tasks from the `tasks` directory
 try { require('require-dir')('tasks'); } catch (err) {}

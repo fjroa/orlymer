@@ -23,7 +23,7 @@
   <script src="../../../bower_components/Faker/build/build/faker.js"></script>    
   <script>
      Polymer({
-        get fichas() {
+        ready: function() {
             var data = [];
             faker.locale = "es";
             for(var i = 0; i < this.num; i++) {
@@ -36,7 +36,7 @@
                     provincia: faker.address.state()
                 });
             }
-            return data;
+            this.fichas = data;
         }
     });
   </script>
