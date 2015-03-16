@@ -1,16 +1,24 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/core-media-query/core-media-query.html">
-<link rel="import" href="../../../bower_components/core-media-query/core-media-query.html">
+<link rel="import" href="../../../bower_components/core-drag-drop/core-drag-drop.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 
-<polymer-element name="ficha-persona" attributes="query" noscript>
+<polymer-element name="ficha-persona" attributes="query drag" noscript>
   <template>
     <link rel="stylesheet" href="ficha-persona.css">
     
     <div layout vertical center flex>
         <core-style></core-style>
-        <foto>
-            <content select="img"></content>
-        </foto>
+        <div horizontal layout>
+            <foto self-center flex>
+                <content select="img"></content>
+            </foto>
+            <div self-stretch hidden?="{{!drag}}">
+            <paper-icon-button class="drag-button" icon="swap-vert-circle" title="Mover">
+                <core-drag-drop></core-drag-drop>
+            </paper-icon-button>
+            </div>
+        </div>
         <div horizontal center-justified layout>
             <content select="nombre"></content>&nbsp;
             <content select="apellido1"></content>&nbsp;

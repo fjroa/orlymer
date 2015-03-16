@@ -10,7 +10,7 @@
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $from), color-stop(100%, $to));
 	background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%);
 	background: -o-radial-gradient(center, circle cover, $from 0%, $to 100%);
-	background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%);
+	background-image: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%);
 	background: radial-gradient(center, circle cover, $from 0%, $to 100%);
 	background-color: rgba(0,0,0,0.03);
 }
@@ -21,10 +21,11 @@
   padding: 10px;
   font-size: 1rem;
   font-weight: 100; 
-  width: calc((100 / 8)% - 16px);
-  max-width: 250px;
-  max-height: 400px;
+  width: 250px;
+  max-width: 250 px;//calc((100 / 8)% - 16px);
+  max-height: 250px;
   overflow: hidden;
+  font-family: 'Roboto 2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 ::content nombre, ::content apellido1, ::content apellido2 {
@@ -63,4 +64,9 @@ polyfill-next-selector { content: '.ficha-alumno img:hover'; }
 
 paper-ripple {
   color: #4285f4;
+}
+
+.drag-button {
+  color: black;
+  padding: 0;
 }

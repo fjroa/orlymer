@@ -1,24 +1,41 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../ficha-persona/ficha-persona.html">
+<link rel="import" href="../ficha-detalle/ficha-detalle.html">
+<link rel="import" href="../../../bower_components/core-animated-pages/core-animated-pages.html">
 
 <polymer-element name="ficha-persona-lista" attributes="num">
 
   <template>
-    <link rel="stylesheet" href="ficha-persona-lista.css">
-      
+
+   <link rel="stylesheet" href="ficha-persona-lista.css">
    <!-- <ficha-service id="service" fichas="{{fichas}}"></ficha-service>-->
-    <section>
-      <template repeat="{{ficha in fichas}}">
-          <ficha-persona>
-            <img src="{{ficha.avatar}}">
-            <nombre>{{ficha.nombre}}</nombre>
-            <apellido1>{{ficha.apellido1}}</apellido1>
-            <apellido2>{{ficha.apellido2}}</apellido2>
-            <ciudad>{{ficha.ciudad}}</ciudad>
-            <provincia>{{ficha.provincia}}</provincia>  
-          </ficha-persona>    
-      </template>
-    </section>
+   <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
+        <section>
+        <div class="ficha-container" hero-p on-tap="{{transition}}">
+          <template repeat="{{ficha in fichas}}">
+              <ficha-persona drag="{{showDrag}}" hero-id="{{ficha.nombre}}-{{ficha.apellido1}}-foto" hero?="{{selectedFicha === ficha}}">
+                <img draggable="false" src="{{ficha.avatar}}">
+                <nombre>{{ficha.nombre}}</nombre>
+                <apellido1>{{ficha.apellido1}}</apellido1>
+                <apellido2>{{ficha.apellido2}}</apellido2>
+                <ciudad>{{ficha.ciudad}}</ciudad>
+                <provincia>{{ficha.provincia}}</provincia>  
+              </ficha-persona>    
+          </template>
+        </div>
+        </section>
+       
+       <section id="details">
+          <ficha-detalle hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}" hero page="{{page}}">
+            <img src="{{selectedFicha.avatar}}" hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}-foto" hero>
+                <nombre>{{selectedFicha.nombre}}</nombre>
+                <apellido1>{{selectedFicha.apellido1}}</apellido1>
+                <apellido2>{{selectedFicha.apellido2}}</apellido2>
+                <ciudad>{{selectedFicha.ciudad}}</ciudad>
+                <provincia>{{selectedFicha.provincia}}</provincia> 
+          </ficha-detalle>    
+      </section>
+    </core-animated-pages>
   </template>
   <script src="../../../bower_components/Faker/build/build/faker.js"></script>    
   <script>
@@ -33,10 +50,54 @@
                     apellido2: faker.name.lastName(),
                     avatar: faker.image.avatar(),
                     ciudad: faker.address.city(),
-                    provincia: faker.address.state()
+                    provincia: faker.address.state(),
+                    id : i
                 });
             }
             this.fichas = data;
+            
+            this.addEventListener('drag-start', function(e) {
+              var dragInfo = e.detail;
+              // flaw #2: e vs dragInfo.event
+              while (e.detail.avatar.firstChild) {
+                  e.detail.avatar.removeChild(e.detail.avatar.firstChild);
+              }   
+              dragInfo.avatar.style.cssText = 'padding:10px; border: 3px solid #FFF; width: 50px; height: 50px; border-radius: 50px; background-color: whitesmoke';
+              var d = document.createElement('div');
+              var ficha = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
+              d.innerHTML = ficha.nombre + ' ' + ficha.apellido1 + ' ' + ficha.apellido2;
+              e.detail.avatar.appendChild(d);
+              dragInfo.drag = function(e) {this.showDrag = false};
+              dragInfo.drop = this.dropFunction;
+            });
+        },
+         
+       selectedFicha: null,
+         
+       transition: function(e) {
+        if (this.page === 0 && e.target.templateInstance.model.ficha) {
+          this.selectedFicha = e.target.templateInstance.model.ficha;
+          this.page = 1;
+        }},
+         
+        showDrag: true,
+         
+        dropFunction : function(dragInfo) {
+           showDrag = true;
+           var fichas = dragInfo.event.target.templateInstance.model.templateInstance.model.fichas;
+           var fichaOrigen = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
+           var fichaDestino = dragInfo.event.relatedTarget.templateInstance.model.ficha;    
+           
+           var idDestino = fichaDestino.id;
+           var idOrigen = fichaOrigen.id;
+            
+           var temp = fichas[fichaOrigen.id];
+            //Nuevo Origen
+           fichas[idOrigen] = fichas[fichaDestino.id];
+           fichas[idOrigen].id = idOrigen;
+           //Nuevo Destino;
+           fichas[idDestino] = temp;
+           fichas[idDestino].id = idDestino;    
         }
     });
   </script>

@@ -1,0 +1,36 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<polymer-element name="ficha-detalle" attributes="page">
+  <template>
+    <link rel="stylesheet" href="ficha-detalle.css">
+      
+    <div layout horizontal>
+
+            <content select="img"></content>
+
+            <paper-shadow flex>
+                    <paper-item>Nombre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <content select="nombre"></content></paper-item>
+                    <paper-item>Apellido 1 : <content select="apellido1"></content></paper-item>
+                    <paper-item>Apellido 2 : <content select="apellido2"></content></paper-item>
+                    <paper-item>Ciudad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <content select="ciudad"></content></paper-item>
+                    <paper-item>Provincia&nbsp;: <content select="provincia"></content></paper-item>
+            </paper-shadow>
+
+            <paper-icon-button icon="close" title="Cerrar" style="color:red" on-click="{{close}}"></paper-icon-button>
+
+    </div>
+    <content></content>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        // define element prototype here
+        close: function(e) {
+          this.page = 0;
+        }
+      });
+    })();
+  </script>
+</polymer-element>
