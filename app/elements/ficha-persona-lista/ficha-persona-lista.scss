@@ -3,6 +3,7 @@
  -webkit-user-select: none;
  -moz-user-select: none;
  -ms-user-select: none;
+  color:black;
 }
 
 #details {
@@ -16,4 +17,8 @@
     height: 50px;
     border-radius: 50px;
     background-color: whitesmoke;
+}
+
+paper-slider {
+  width: 100%;
 }

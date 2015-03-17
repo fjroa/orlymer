@@ -18,7 +18,6 @@
 :host {
   display: inline-block;
   background-color:rgba(0, 0, 0, 0.05);
-  padding: 10px;
   font-size: 1rem;
   font-weight: 100;
   width: 250px;
@@ -26,6 +25,7 @@
   max-height: 250px;
   overflow: hidden;
   font-family: 'Roboto 2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: black;
 }
 
 ::content nombre, ::content apellido1, ::content apellido2 {
@@ -42,17 +42,10 @@
   font-style: italic;
 }
 
-:host foto {
-    @include clip-path(ellipse(39% 44% at 50% 50%));
-    @include radial-gradient(#FFF, #000);
-    overflow: hidden;
-    max-height: 150px;
-    max-width: 150px;
-}
-
 polyfill-next-selector { content: '.ficha-alumno img'; }
 ::content img {
-  @include clip-path(ellipse(40% 47% at 50% 50%));
+  @include clip-path(ellipse(32% 42% at 50% 50%));
+  overflow: hidden;    
   opacity: 0.8;
   max-height: 150px;
 }
@@ -69,7 +62,12 @@ paper-ripple {
   color: #4285f4;
 }
 
-.drag-button {
+paper-icon-button {
   color: black;
-  padding: 0;
+  padding: 8 0 0 0;
 }
+
+core-image {
+  max-height: 150px;  
+}
+

@@ -17,7 +17,7 @@
   font-family: 'Roboto 2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
-  @include linear-gradient(#000, #BADA55);
+  @include linear-gradient(#f2efef, whitesmoke);
 }
 
 :host paper-shadow .paperform{
@@ -40,5 +40,5 @@ paper-input-decorator {
 core-image {
   width: 300px;
   heigth: 350px;
-  margin-right : 20px;
+  margin-right : 15px;
 }

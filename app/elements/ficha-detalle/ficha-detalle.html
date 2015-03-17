@@ -6,25 +6,23 @@
 <link rel="import" href="../../../bower_components/cam-snap/cam-snap.html">
 
 <polymer-element name="ficha-detalle" attributes="page ficha">
-  <template>
+ <template>
     <link rel="stylesheet" href="ficha-detalle.css">
 
-    <div layout horizontal>
-<div layout vertical>
-            <core-image self-center
-  sizing="cover" preload draggable="false"><content id="fotoFicha" select="img"></content></core-image>
-    <cam-snap id="camara" hidden?="{{!cameraVisible || !editar}}"></cam-snap>
-    <div center center-justified hidden?="{{!editar}}" on-tap="{{mostrarCamara}}">
-      <core-icon icon="image:camera"></core-icon>
-      <div id="result">
-        <h3>Last Image</h3>
-        <img id="pic"></img>
-      </div>
-      Cambiar Foto
-    </div>
-</div>
-<div>
-            <paper-shadow class="paper-form" flex>
+    <div layout center-justified horizontal>
+		<div center-justified layout vertical>
+				<core-image flex center-justified hidden?="{{cameraVisible}}" sizing="contais" preload draggable="false">
+					<content select="img"></content>
+				</core-image>
+				
+				<cam-snap id="camara" hidden?="{{!cameraVisible || !editar}}"></cam-snap>
+				
+				<div center center-justified hidden?="{{!editar}}" on-tap="{{mostrarCamara}}">
+					<core-icon icon="image:camera-alt"></core-icon>
+					Cambiar Foto
+				</div>
+		</div>
+            <paper-shadow id="paperForm" class="paper-form" flex>
                     <paper-item>Nombre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                       <paper-input-decorator id="decoNombre" >
                           <input id="nombre" is="core-input" value="{{ficha.nombre}}" disabled?="{{!editar}}">
@@ -59,7 +57,6 @@
                <paper-icon-button icon="create" title="Editar" style="color:grey" on-click="{{edit}}"></paper-icon-button>
              </paper-shadow>
            </div>
-    </div>
 </div>
     <content></content>
   </template>
@@ -72,26 +69,32 @@
         close: function(e) {
           this.page = 0;
           this.cameraVisible = false;
+          if (this.editar) {
+              this.edit();
+          };
         },
         edit: function(e) {
           if (this.editar) {
             this.editar = false;
             e.target.style.color="grey";
+            this.$.paperForm.style.backgroundColor = "whitesmoke";  
             this.cameraVisible = false;
           } else {
             this.editar = true;
             e.target.style.color ="orange";
+            this.$.paperForm.style.backgroundColor ="white"; 
           }
         },
         mostrarCamara: function(e) {
           this.cameraVisible = true;
         },
-        domReady : function(e) {
-          document.querySelector('cam-snap').addEventListener('change', function(e) {
-            if (e.detail.data) { document.querySelector('#pic').src = e.detail.data; }
-            console.log('Change');
+        ready : function() {
+          this.$.camara.addEventListener('change', function(e) {
+            if (e.detail.data) { document.querySelector('img').src = e.detail.data; 
+                                e.target.templateInstance.model.ficha.avatar = e.detail.data; 
+                                e.target.templateInstance.model.cameraVisible = false;
+                               }
           });
-          console.log('DomReady');
         }
       });
     })();

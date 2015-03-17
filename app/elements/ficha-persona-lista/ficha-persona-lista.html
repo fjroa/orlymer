@@ -2,13 +2,19 @@
 <link rel="import" href="../ficha-persona/ficha-persona.html">
 <link rel="import" href="../ficha-detalle/ficha-detalle.html">
 <link rel="import" href="../../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
 
 <polymer-element name="ficha-persona-lista" attributes="num">
-
   <template>
-
    <link rel="stylesheet" href="ficha-persona-lista.css">
    <!-- <ficha-service id="service" fichas="{{fichas}}"></ficha-service>-->
+   <section class="green-slider">      
+        <div>
+          <span>Número de Fichas </span><span id="numFichasLabel"></span>
+        </div>
+        <br>
+       <paper-slider id="numFichas" pin snaps max="100" step="1" value="{{num}}"></paper-slider>  
+   </section>
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
         <section>
         <div class="ficha-container" hero-p on-tap="{{transition}}">
@@ -43,7 +49,7 @@
                     nombre: faker.name.firstName(),
                     apellido1: faker.name.lastName(),
                     apellido2: faker.name.lastName(),
-                    avatar: faker.image.image(),
+                    avatar: faker.image.avatar(),
                     ciudad: faker.address.city(),
                     provincia: faker.address.state(),
                     id : i
@@ -64,6 +70,28 @@
               e.detail.avatar.appendChild(d);
               dragInfo.drag = function() {this.showDrag = false};
               dragInfo.drop = this.dropFunction;
+            });
+            
+            this.addEventListener('core-change', function(e) {
+                this.$.numFichasLabel.innerHTML = this.$.numFichas.value;
+                if (this.$.numFichas.value <= this.fichas.length) {
+                  while (this.fichas.length > this.$.numFichas.value) {
+                      this.fichas.pop();
+                  }
+                } else {
+                 for (var i = this.fichas.length; i < this.$.numFichas.value; i++) {
+                        this.fichas.push({
+                        nombre: faker.name.firstName(),
+                        apellido1: faker.name.lastName(),
+                        apellido2: faker.name.lastName(),
+                        avatar: faker.image.avatar(),
+                        ciudad: faker.address.city(),
+                        provincia: faker.address.state(),
+                        id : i
+                    });
+                 }
+                }
+                this.num = this.$.numFichas.value;
             });
         },
 
@@ -95,5 +123,6 @@
            fichas[idDestino].id = idDestino;
         }
     });
+      
   </script>
 </polymer-element>
