@@ -2,19 +2,25 @@
 <link rel="import" href="../../../bower_components/core-media-query/core-media-query.html">
 <link rel="import" href="../../../bower_components/core-drag-drop/core-drag-drop.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/core-iconset/core-iconset.html">
+<link rel="import" href="../../../bower_components/core-image/core-image.html">
 
 <polymer-element name="ficha-persona" attributes="query drag" noscript>
+  <core-iconset id="custom-icons-png" src="Drag_and_Drop-24.png" width="24" iconSize="24"
+  icons="drag">
+</core-iconset>
   <template>
     <link rel="stylesheet" href="ficha-persona.css">
-    
+
     <div layout vertical center flex>
         <core-style></core-style>
         <div horizontal layout>
             <foto self-center flex>
-                <content select="img"></content>
+              <core-image
+              sizing="cover" preload draggable="false"><content select="img"></content></core-image>
             </foto>
             <div self-stretch hidden?="{{!drag}}">
-            <paper-icon-button class="drag-button" icon="swap-vert-circle" title="Mover">
+            <paper-icon-button class="drag-button" icon="custom-icons-png:drag" title="Mover">
                 <core-drag-drop></core-drag-drop>
             </paper-icon-button>
             </div>
@@ -31,9 +37,9 @@
     </div>
     <content></content>
   </template>
-  
+
   <core-media-query
       query="{{query}}"
       queryMatches="{{smallScreen}}">
-  </core-media-query>  
+  </core-media-query>
 </polymer-element>

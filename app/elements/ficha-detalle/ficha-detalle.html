@@ -1,36 +1,100 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input-decorator.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/core-image/core-image.html">
+<link rel="import" href="../../../bower_components/cam-snap/cam-snap.html">
 
-<polymer-element name="ficha-detalle" attributes="page">
+<polymer-element name="ficha-detalle" attributes="page ficha">
   <template>
     <link rel="stylesheet" href="ficha-detalle.css">
-      
+
     <div layout horizontal>
-
-            <content select="img"></content>
-
-            <paper-shadow flex>
-                    <paper-item>Nombre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <content select="nombre"></content></paper-item>
-                    <paper-item>Apellido 1 : <content select="apellido1"></content></paper-item>
-                    <paper-item>Apellido 2 : <content select="apellido2"></content></paper-item>
-                    <paper-item>Ciudad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <content select="ciudad"></content></paper-item>
-                    <paper-item>Provincia&nbsp;: <content select="provincia"></content></paper-item>
-            </paper-shadow>
-
-            <paper-icon-button icon="close" title="Cerrar" style="color:red" on-click="{{close}}"></paper-icon-button>
-
+<div layout vertical>
+            <core-image self-center
+  sizing="cover" preload draggable="false"><content id="fotoFicha" select="img"></content></core-image>
+    <cam-snap id="camara" hidden?="{{!cameraVisible || !editar}}"></cam-snap>
+    <div center center-justified hidden?="{{!editar}}" on-tap="{{mostrarCamara}}">
+      <core-icon icon="image:camera"></core-icon>
+      <div id="result">
+        <h3>Last Image</h3>
+        <img id="pic"></img>
+      </div>
+      Cambiar Foto
     </div>
+</div>
+<div>
+            <paper-shadow class="paper-form" flex>
+                    <paper-item>Nombre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                      <paper-input-decorator id="decoNombre" >
+                          <input id="nombre" is="core-input" value="{{ficha.nombre}}" disabled?="{{!editar}}">
+                      </paper-input-decorator>
+                    </paper-item>
+                    <paper-item>Apellido 1 :
+                      <paper-input-decorator id="decoNombre" >
+                          <input id="nombre" is="core-input" value="{{ficha.apellido1}}" disabled?="{{!editar}}">
+                      </paper-input-decorator>
+                    </paper-item>
+                    <paper-item>Apellido 2 :
+                      <paper-input-decorator id="decoNombre" >
+                          <input id="nombre" is="core-input" value="{{ficha.apellido2}}" disabled?="{{!editar}}">
+                      </paper-input-decorator>
+                    </paper-item>
+                    <paper-item>Ciudad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                      <paper-input-decorator id="decoNombre" >
+                          <input id="nombre" is="core-input" value="{{ficha.ciudad}}" disabled?="{{!editar}}">
+                      </paper-input-decorator>
+                    </paper-item>
+                    <paper-item>Provincia&nbsp;&nbsp;:
+                      <paper-input-decorator id="decoNombre" >
+                          <input id="nombre" is="core-input" value="{{ficha.provincia}}" disabled?="{{!editar}}">
+                      </paper-input-decorator>
+                    </paper-item>
+            </paper-shadow>
+            <div layout vertical>
+              <paper-shadow z="1">
+               <paper-icon-button icon="close" title="Cerrar" style="color:red" on-click="{{close}}"></paper-icon-button>
+             </paper-shadow>
+              <paper-shadow z="1">
+               <paper-icon-button icon="create" title="Editar" style="color:grey" on-click="{{edit}}"></paper-icon-button>
+             </paper-shadow>
+           </div>
+    </div>
+</div>
     <content></content>
   </template>
   <script>
     (function () {
       Polymer({
         // define element prototype here
+        editar: false,
+        cameraVisible: false,
         close: function(e) {
           this.page = 0;
+          this.cameraVisible = false;
+        },
+        edit: function(e) {
+          if (this.editar) {
+            this.editar = false;
+            e.target.style.color="grey";
+            this.cameraVisible = false;
+          } else {
+            this.editar = true;
+            e.target.style.color ="orange";
+          }
+        },
+        mostrarCamara: function(e) {
+          this.cameraVisible = true;
+        },
+        domReady : function(e) {
+          document.querySelector('cam-snap').addEventListener('change', function(e) {
+            if (e.detail.data) { document.querySelector('#pic').src = e.detail.data; }
+            console.log('Change');
+          });
+          console.log('DomReady');
         }
       });
     })();
+
   </script>
 </polymer-element>

@@ -24,7 +24,7 @@
 
     <!-- Route controller. -->
     <flatiron-director route="{{route}}" autoHash></flatiron-director>
-      
+
     <core-scaffold id="scaffold">
       <core-header-panel navigation flex>
         <core-toolbar>{{menuName}}</core-toolbar>
@@ -49,14 +49,11 @@
         <div class="content">
             <core-pages id="pages" selected="{{route}}" valueattr="hash">
                   <section hash="principal">
-                     <ficha-detalle>                         
-                        <img src="./images/535106-user_512x512.png">
-                        <nombre>Francisco Javier</nombre>
-                        <apellido1>Roa</apellido1>
-                        <apellido2>López</apellido2>
-                        <ciudad>Jaén</ciudad>
-                        <provincia>Jaén</provincia>  
-                     </ficha-detalle>   
+                    <template repeat="{{ficha, i in fichas}}">
+                     <ficha-detalle ficha="{{ficha}}">
+                      <img src= '../images/535106-user_512x512.png' draggable="false">
+                     </ficha-detalle>
+                   </template>
                   </section>
                   <section hash="fichas">
                     <ficha-persona-lista num="10"></ficha-persona-lista>

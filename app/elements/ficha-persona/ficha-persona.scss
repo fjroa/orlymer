@@ -20,7 +20,7 @@
   background-color:rgba(0, 0, 0, 0.05);
   padding: 10px;
   font-size: 1rem;
-  font-weight: 100; 
+  font-weight: 100;
   width: 250px;
   max-width: 250 px;//calc((100 / 8)% - 16px);
   max-height: 250px;
@@ -44,16 +44,19 @@
 
 :host foto {
     @include clip-path(ellipse(39% 44% at 50% 50%));
-    @include radial-gradient(#FFF, #000);  
+    @include radial-gradient(#FFF, #000);
     overflow: hidden;
+    max-height: 150px;
+    max-width: 150px;
 }
 
 polyfill-next-selector { content: '.ficha-alumno img'; }
 ::content img {
   @include clip-path(ellipse(40% 47% at 50% 50%));
   opacity: 0.8;
-  margin: 2px;
+  max-height: 150px;
 }
+
 
 polyfill-next-selector { content: '.ficha-alumno img:hover'; }
 ::content img:hover {

@@ -19,25 +19,20 @@
                 <apellido1>{{ficha.apellido1}}</apellido1>
                 <apellido2>{{ficha.apellido2}}</apellido2>
                 <ciudad>{{ficha.ciudad}}</ciudad>
-                <provincia>{{ficha.provincia}}</provincia>  
-              </ficha-persona>    
+                <provincia>{{ficha.provincia}}</provincia>
+              </ficha-persona>
           </template>
         </div>
         </section>
-       
+
        <section id="details">
-          <ficha-detalle hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}" hero page="{{page}}">
+          <ficha-detalle ficha="{{selectedFicha}}" hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}" hero page="{{page}}">
             <img src="{{selectedFicha.avatar}}" hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}-foto" hero>
-                <nombre>{{selectedFicha.nombre}}</nombre>
-                <apellido1>{{selectedFicha.apellido1}}</apellido1>
-                <apellido2>{{selectedFicha.apellido2}}</apellido2>
-                <ciudad>{{selectedFicha.ciudad}}</ciudad>
-                <provincia>{{selectedFicha.provincia}}</provincia> 
-          </ficha-detalle>    
+          </ficha-detalle>
       </section>
     </core-animated-pages>
   </template>
-  <script src="../../../bower_components/Faker/build/build/faker.js"></script>    
+  <script src="../../../bower_components/Faker/build/build/faker.js"></script>
   <script>
      Polymer({
         ready: function() {
@@ -48,56 +43,56 @@
                     nombre: faker.name.firstName(),
                     apellido1: faker.name.lastName(),
                     apellido2: faker.name.lastName(),
-                    avatar: faker.image.avatar(),
+                    avatar: faker.image.image(),
                     ciudad: faker.address.city(),
                     provincia: faker.address.state(),
                     id : i
                 });
             }
             this.fichas = data;
-            
+
             this.addEventListener('drag-start', function(e) {
               var dragInfo = e.detail;
               // flaw #2: e vs dragInfo.event
               while (e.detail.avatar.firstChild) {
                   e.detail.avatar.removeChild(e.detail.avatar.firstChild);
-              }   
+              }
               dragInfo.avatar.style.cssText = 'padding:10px; border: 3px solid #FFF; width: 50px; height: 50px; border-radius: 50px; background-color: whitesmoke';
               var d = document.createElement('div');
               var ficha = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
               d.innerHTML = ficha.nombre + ' ' + ficha.apellido1 + ' ' + ficha.apellido2;
               e.detail.avatar.appendChild(d);
-              dragInfo.drag = function(e) {this.showDrag = false};
+              dragInfo.drag = function() {this.showDrag = false};
               dragInfo.drop = this.dropFunction;
             });
         },
-         
+
        selectedFicha: null,
-         
+
        transition: function(e) {
         if (this.page === 0 && e.target.templateInstance.model.ficha) {
           this.selectedFicha = e.target.templateInstance.model.ficha;
           this.page = 1;
         }},
-         
+
         showDrag: true,
-         
+
         dropFunction : function(dragInfo) {
            showDrag = true;
            var fichas = dragInfo.event.target.templateInstance.model.templateInstance.model.fichas;
            var fichaOrigen = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
-           var fichaDestino = dragInfo.event.relatedTarget.templateInstance.model.ficha;    
-           
+           var fichaDestino = dragInfo.event.relatedTarget.templateInstance.model.ficha;
+
            var idDestino = fichaDestino.id;
            var idOrigen = fichaOrigen.id;
-            
+
            var temp = fichas[fichaOrigen.id];
             //Nuevo Origen
            fichas[idOrigen] = fichas[fichaDestino.id];
            fichas[idOrigen].id = idOrigen;
            //Nuevo Destino;
            fichas[idDestino] = temp;
-           fichas[idDestino].id = idDestino;    
+           fichas[idDestino].id = idDestino;
         }
     });
   </script>

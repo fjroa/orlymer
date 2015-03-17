@@ -6,7 +6,6 @@
     "paper-elements": "Polymer/paper-elements#^0.5.5",
     "polymer": "Polymer/polymer#^0.5.5",
     "Faker": "~2.1.2",
-    "video-camera-element": "~0.1.3",
     "cam-snap": "divshot/cam-snap#master"
   },
   "devDependencies": {

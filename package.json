@@ -1,10 +1,11 @@
 {
   "name": "orlymer",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "apache-server-configs": "^2.13.0",
-    "browser-sync": "^2.2.3",
+    "browser-sync": "^2.2.5",
     "del": "^1.1.1",
     "faker": "^2.1.2",
     "gulp": "^3.8.5",

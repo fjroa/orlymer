@@ -1,8 +1,0 @@
-{
-    "jscodehints.detectedExclusions": [
-        "D:/proyectos/polymer/orlymer/bower_components/google-code-prettify/src/lang-tcl.js"
-    ],
-    "proxy": "http://fjroa:SeVaH1Foll@proxy:8080",
-    "prefUI.proxy-enabled": true,
-    "prefUI.proxy-string": "http://fjroa:SeVaH1Foll@proxy:8080"  
-}
