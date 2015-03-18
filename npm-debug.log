@@ -1,0 +1,282 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose install where, deps [ '/Users/franciscojroalopez/projects/orlymer',
+4 verbose install   [ 'apache-server-configs',
+4 verbose install     'browser-sync',
+4 verbose install     'del',
+4 verbose install     'express',
+4 verbose install     'faker',
+4 verbose install     'gulp',
+4 verbose install     'gulp-autoprefixer',
+4 verbose install     'gulp-cache',
+4 verbose install     'gulp-changed',
+4 verbose install     'gulp-cssmin',
+4 verbose install     'gulp-flatten',
+4 verbose install     'gulp-if',
+4 verbose install     'gulp-imagemin',
+4 verbose install     'gulp-jshint',
+4 verbose install     'gulp-load-plugins',
+4 verbose install     'gulp-minify-html',
+4 verbose install     'gulp-rename',
+4 verbose install     'gulp-replace',
+4 verbose install     'gulp-ruby-sass',
+4 verbose install     'gulp-size',
+4 verbose install     'gulp-uglify',
+4 verbose install     'gulp-uncss',
+4 verbose install     'gulp-useref',
+4 verbose install     'gulp-vulcanize',
+4 verbose install     'gzippo',
+4 verbose install     'jshint-stylish',
+4 verbose install     'merge-stream',
+4 verbose install     'morgan',
+4 verbose install     'opn',
+4 verbose install     'psi',
+4 verbose install     'require-dir',
+4 verbose install     'run-sequence' ] ]
+5 verbose install where, peers [ '/Users/franciscojroalopez/projects/orlymer', [] ]
+6 info preinstall orlymer@0.1.0
+7 warn package.json faker@2.1.2 No README data
+8 verbose already installed skipping gulp-ruby-sass@^0.7.1 /Users/franciscojroalopez/projects/orlymer
+9 verbose already installed skipping gulp-size@^1.0.0 /Users/franciscojroalopez/projects/orlymer
+10 verbose already installed skipping gulp-uglify@^0.3.1 /Users/franciscojroalopez/projects/orlymer
+11 verbose already installed skipping gulp-uncss@^0.4.5 /Users/franciscojroalopez/projects/orlymer
+12 verbose already installed skipping gulp-useref@^0.6.0 /Users/franciscojroalopez/projects/orlymer
+13 verbose already installed skipping gulp-vulcanize@^5.0.0 /Users/franciscojroalopez/projects/orlymer
+14 verbose already installed skipping gzippo@^0.2.0 /Users/franciscojroalopez/projects/orlymer
+15 verbose already installed skipping jshint-stylish@^1.0.1 /Users/franciscojroalopez/projects/orlymer
+16 verbose already installed skipping merge-stream@^0.1.7 /Users/franciscojroalopez/projects/orlymer
+17 verbose already installed skipping morgan@^1.5.2 /Users/franciscojroalopez/projects/orlymer
+18 verbose already installed skipping opn@^1.0.1 /Users/franciscojroalopez/projects/orlymer
+19 verbose already installed skipping psi@^1.0.6 /Users/franciscojroalopez/projects/orlymer
+20 verbose already installed skipping require-dir@^0.1.0 /Users/franciscojroalopez/projects/orlymer
+21 verbose already installed skipping run-sequence@^1.0.2 /Users/franciscojroalopez/projects/orlymer
+22 verbose already installed skipping apache-server-configs@^2.13.0 /Users/franciscojroalopez/projects/orlymer
+23 verbose already installed skipping browser-sync@^2.2.5 /Users/franciscojroalopez/projects/orlymer
+24 verbose already installed skipping del@^1.1.1 /Users/franciscojroalopez/projects/orlymer
+25 verbose already installed skipping express@^4.12.3 /Users/franciscojroalopez/projects/orlymer
+26 verbose already installed skipping faker@^2.1.2 /Users/franciscojroalopez/projects/orlymer
+27 verbose already installed skipping gulp@^3.8.5 /Users/franciscojroalopez/projects/orlymer
+28 verbose already installed skipping gulp-autoprefixer@^0.0.8 /Users/franciscojroalopez/projects/orlymer
+29 verbose already installed skipping gulp-cache@^0.2.2 /Users/franciscojroalopez/projects/orlymer
+30 verbose already installed skipping gulp-changed@^1.0.0 /Users/franciscojroalopez/projects/orlymer
+31 verbose already installed skipping gulp-cssmin@^0.1.6 /Users/franciscojroalopez/projects/orlymer
+32 verbose already installed skipping gulp-flatten@^0.0.2 /Users/franciscojroalopez/projects/orlymer
+33 verbose already installed skipping gulp-if@^1.2.1 /Users/franciscojroalopez/projects/orlymer
+34 verbose already installed skipping gulp-imagemin@^1.0.0 /Users/franciscojroalopez/projects/orlymer
+35 verbose already installed skipping gulp-jshint@^1.6.3 /Users/franciscojroalopez/projects/orlymer
+36 verbose already installed skipping gulp-load-plugins@^0.5.3 /Users/franciscojroalopez/projects/orlymer
+37 verbose already installed skipping gulp-minify-html@^0.1.4 /Users/franciscojroalopez/projects/orlymer
+38 verbose already installed skipping gulp-rename@^1.2.0 /Users/franciscojroalopez/projects/orlymer
+39 verbose already installed skipping gulp-replace@^0.4.0 /Users/franciscojroalopez/projects/orlymer
+40 silly install resolved []
+41 info build /Users/franciscojroalopez/projects/orlymer
+42 verbose linkStuff [ false, false, false, '/Users/franciscojroalopez/projects' ]
+43 info linkStuff orlymer@0.1.0
+44 verbose linkBins orlymer@0.1.0
+45 verbose linkMans orlymer@0.1.0
+46 verbose rebuildBundles orlymer@0.1.0
+47 verbose rebuildBundles [ '.DS_Store',
+47 verbose rebuildBundles   '.bin',
+47 verbose rebuildBundles   'apache-server-configs',
+47 verbose rebuildBundles   'browser-sync',
+47 verbose rebuildBundles   'del',
+47 verbose rebuildBundles   'dev-ip',
+47 verbose rebuildBundles   'dyson',
+47 verbose rebuildBundles   'express',
+47 verbose rebuildBundles   'faker',
+47 verbose rebuildBundles   'gulp',
+47 verbose rebuildBundles   'gulp-autoprefixer',
+47 verbose rebuildBundles   'gulp-cache',
+47 verbose rebuildBundles   'gulp-changed',
+47 verbose rebuildBundles   'gulp-cssmin',
+47 verbose rebuildBundles   'gulp-flatten',
+47 verbose rebuildBundles   'gulp-if',
+47 verbose rebuildBundles   'gulp-imagemin',
+47 verbose rebuildBundles   'gulp-jshint',
+47 verbose rebuildBundles   'gulp-load-plugins',
+47 verbose rebuildBundles   'gulp-minify-html',
+47 verbose rebuildBundles   'gulp-rename',
+47 verbose rebuildBundles   'gulp-replace',
+47 verbose rebuildBundles   'gulp-ruby-sass',
+47 verbose rebuildBundles   'gulp-size',
+47 verbose rebuildBundles   'gulp-uglify',
+47 verbose rebuildBundles   'gulp-uncss',
+47 verbose rebuildBundles   'gulp-useref',
+47 verbose rebuildBundles   'gulp-vulcanize',
+47 verbose rebuildBundles   'gzippo',
+47 verbose rebuildBundles   'immutable',
+47 verbose rebuildBundles   'jshint-stylish',
+47 verbose rebuildBundles   'lodash',
+47 verbose rebuildBundles   'merge-stream',
+47 verbose rebuildBundles   'morgan',
+47 verbose rebuildBundles   'opn',
+47 verbose rebuildBundles   'portscanner',
+47 verbose rebuildBundles   'psi',
+47 verbose rebuildBundles   'require-dir',
+47 verbose rebuildBundles   'resp-modifier',
+47 verbose rebuildBundles   'run-sequence',
+47 verbose rebuildBundles   'slash',
+47 verbose rebuildBundles   'web-component-tester' ]
+48 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/dev-ip
+49 info build /Users/franciscojroalopez/projects/orlymer/node_modules/dev-ip
+50 info preinstall dev-ip@1.0.1
+51 verbose linkStuff [ false,
+51 verbose linkStuff   false,
+51 verbose linkStuff   false,
+51 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+52 info linkStuff dev-ip@1.0.1
+53 verbose linkBins dev-ip@1.0.1
+54 verbose link bins [ { 'dev-ip': 'lib/dev-ip.js' },
+54 verbose link bins   '/Users/franciscojroalopez/projects/orlymer/node_modules/.bin',
+54 verbose link bins   false ]
+55 verbose linkMans dev-ip@1.0.1
+56 verbose rebuildBundles dev-ip@1.0.1
+57 verbose gentlyRm vacuuming /Users/franciscojroalopez/projects/orlymer/node_modules/.bin/dev-ip
+58 silly gentlyRm purging /Users/franciscojroalopez/projects/orlymer/node_modules/.bin/dev-ip
+59 silly gentlyRm quitting because other entries in /Users/franciscojroalopez/projects/orlymer/node_modules/.bin
+60 info install dev-ip@1.0.1
+61 info postinstall dev-ip@1.0.1
+62 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/dyson
+63 info build /Users/franciscojroalopez/projects/orlymer/node_modules/dyson
+64 info preinstall dyson@0.4.0
+65 verbose linkStuff [ false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+66 info linkStuff dyson@0.4.0
+67 warn prefer global dyson@0.4.0 should be installed with -g
+68 verbose linkBins dyson@0.4.0
+69 verbose link bins [ { dyson: './bin/dyson.js' },
+69 verbose link bins   '/Users/franciscojroalopez/projects/orlymer/node_modules/.bin',
+69 verbose link bins   false ]
+70 verbose linkMans dyson@0.4.0
+71 verbose rebuildBundles dyson@0.4.0
+72 verbose rebuildBundles [ '.bin',
+72 verbose rebuildBundles   'body-parser',
+72 verbose rebuildBundles   'cookie-parser',
+72 verbose rebuildBundles   'cors',
+72 verbose rebuildBundles   'express',
+72 verbose rebuildBundles   'lodash',
+72 verbose rebuildBundles   'ncp',
+72 verbose rebuildBundles   'request',
+72 verbose rebuildBundles   'static-favicon',
+72 verbose rebuildBundles   'when' ]
+73 verbose gentlyRm vacuuming /Users/franciscojroalopez/projects/orlymer/node_modules/.bin/dyson
+74 silly gentlyRm purging /Users/franciscojroalopez/projects/orlymer/node_modules/.bin/dyson
+75 silly gentlyRm quitting because other entries in /Users/franciscojroalopez/projects/orlymer/node_modules/.bin
+76 info install dyson@0.4.0
+77 info postinstall dyson@0.4.0
+78 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/immutable
+79 info build /Users/franciscojroalopez/projects/orlymer/node_modules/immutable
+80 info preinstall immutable@3.6.4
+81 verbose linkStuff [ false,
+81 verbose linkStuff   false,
+81 verbose linkStuff   false,
+81 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+82 info linkStuff immutable@3.6.4
+83 verbose linkBins immutable@3.6.4
+84 verbose linkMans immutable@3.6.4
+85 verbose rebuildBundles immutable@3.6.4
+86 info install immutable@3.6.4
+87 info postinstall immutable@3.6.4
+88 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/lodash
+89 info build /Users/franciscojroalopez/projects/orlymer/node_modules/lodash
+90 info preinstall lodash@3.5.0
+91 verbose linkStuff [ false,
+91 verbose linkStuff   false,
+91 verbose linkStuff   false,
+91 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+92 info linkStuff lodash@3.5.0
+93 verbose linkBins lodash@3.5.0
+94 verbose linkMans lodash@3.5.0
+95 verbose rebuildBundles lodash@3.5.0
+96 info install lodash@3.5.0
+97 info postinstall lodash@3.5.0
+98 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/portscanner
+99 info build /Users/franciscojroalopez/projects/orlymer/node_modules/portscanner
+100 info preinstall portscanner@1.0.0
+101 verbose linkStuff [ false,
+101 verbose linkStuff   false,
+101 verbose linkStuff   false,
+101 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+102 info linkStuff portscanner@1.0.0
+103 verbose linkBins portscanner@1.0.0
+104 verbose linkMans portscanner@1.0.0
+105 verbose rebuildBundles portscanner@1.0.0
+106 verbose rebuildBundles [ 'async' ]
+107 info install portscanner@1.0.0
+108 info postinstall portscanner@1.0.0
+109 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/resp-modifier
+110 info build /Users/franciscojroalopez/projects/orlymer/node_modules/resp-modifier
+111 info preinstall resp-modifier@2.0.1
+112 verbose linkStuff [ false,
+112 verbose linkStuff   false,
+112 verbose linkStuff   false,
+112 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+113 info linkStuff resp-modifier@2.0.1
+114 verbose linkBins resp-modifier@2.0.1
+115 verbose linkMans resp-modifier@2.0.1
+116 verbose rebuildBundles resp-modifier@2.0.1
+117 verbose rebuildBundles [ 'minimatch' ]
+118 info install resp-modifier@2.0.1
+119 info postinstall resp-modifier@2.0.1
+120 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/slash
+121 info build /Users/franciscojroalopez/projects/orlymer/node_modules/slash
+122 info preinstall slash@1.0.0
+123 verbose linkStuff [ false,
+123 verbose linkStuff   false,
+123 verbose linkStuff   false,
+123 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+124 info linkStuff slash@1.0.0
+125 verbose linkBins slash@1.0.0
+126 verbose linkMans slash@1.0.0
+127 verbose rebuildBundles slash@1.0.0
+128 info install slash@1.0.0
+129 info postinstall slash@1.0.0
+130 verbose rebuild bundle /Users/franciscojroalopez/projects/orlymer/node_modules/web-component-tester
+131 info build /Users/franciscojroalopez/projects/orlymer/node_modules/web-component-tester
+132 info preinstall web-component-tester@2.2.6
+133 verbose linkStuff [ false,
+133 verbose linkStuff   false,
+133 verbose linkStuff   false,
+133 verbose linkStuff   '/Users/franciscojroalopez/projects/orlymer/node_modules' ]
+134 info linkStuff web-component-tester@2.2.6
+135 verbose linkBins web-component-tester@2.2.6
+136 verbose link bins [ { wct: './bin/wct', 'wct-st': './bin/wct-st' },
+136 verbose link bins   '/Users/franciscojroalopez/projects/orlymer/node_modules/.bin',
+136 verbose link bins   false ]
+137 verbose linkMans web-component-tester@2.2.6
+138 verbose rebuildBundles web-component-tester@2.2.6
+139 verbose rebuildBundles [ 'async',
+139 verbose rebuildBundles   'chalk',
+139 verbose rebuildBundles   'cleankill',
+139 verbose rebuildBundles   'express',
+139 verbose rebuildBundles   'findup-sync',
+139 verbose rebuildBundles   'freeport',
+139 verbose rebuildBundles   'glob',
+139 verbose rebuildBundles   'lodash',
+139 verbose rebuildBundles   'nomnom',
+139 verbose rebuildBundles   'resolve',
+139 verbose rebuildBundles   'send',
+139 verbose rebuildBundles   'serve-static',
+139 verbose rebuildBundles   'socket.io',
+139 verbose rebuildBundles   'stacky',
+139 verbose rebuildBundles   'update-notifier',
+139 verbose rebuildBundles   'wct-local',
+139 verbose rebuildBundles   'wct-sauce' ]
+140 verbose stack Error: ENOENT, chmod '/Users/franciscojroalopez/projects/orlymer/node_modules/web-component-tester/bin/wct'
+140 verbose stack     at Error (native)
+141 verbose cwd /Users/franciscojroalopez/projects/orlymer
+142 error Darwin 13.4.0
+143 error argv "node" "/usr/local/bin/npm" "install"
+144 error node v0.12.0
+145 error npm  v2.5.1
+146 error path /Users/franciscojroalopez/projects/orlymer/node_modules/web-component-tester/bin/wct
+147 error code ENOENT
+148 error errno -2
+149 error enoent ENOENT, chmod '/Users/franciscojroalopez/projects/orlymer/node_modules/web-component-tester/bin/wct'
+149 error enoent This is most likely not a problem with npm itself
+149 error enoent and is related to npm not being able to find a file.
+150 verbose exit [ -2, true ]

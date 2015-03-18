@@ -6,7 +6,8 @@
     "paper-elements": "Polymer/paper-elements#^0.5.5",
     "polymer": "Polymer/polymer#^0.5.5",
     "Faker": "~2.1.2",
-    "cam-snap": "divshot/cam-snap#master"
+    "cam-snap": "divshot/cam-snap#master",
+    "polymer-github-card": "~0.0.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.2.3"
