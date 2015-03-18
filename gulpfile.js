@@ -223,7 +223,7 @@ gulp.task('default', ['clean'], function (cb) {
     cb);
 });
 
-gulp.task('heroku', ['clean'], function (cb) {
+gulp.task('build', ['clean'], function (cb) {
   runSequence(
     ['copy', 'styles'],
     'elements',
