@@ -1,10 +1,15 @@
 {
   "name": "orlymer",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fjroa/orlymer.git"
+  },
   "dependencies": {
     "apache-server-configs": "^2.13.0",
     "browser-sync": "^2.2.5",
     "del": "^1.1.1",
+    "express": "^4.12.3",
     "faker": "^2.1.2",
     "gulp": "^3.8.5",
     "gulp-autoprefixer": "^0.0.8",
@@ -25,14 +30,16 @@
     "gulp-uncss": "^0.4.5",
     "gulp-useref": "^0.6.0",
     "gulp-vulcanize": "^5.0.0",
+    "gzippo": "^0.2.0",
     "jshint-stylish": "^1.0.1",
     "merge-stream": "^0.1.7",
+    "morgan": "^1.5.2",
     "opn": "^1.0.1",
     "psi": "^1.0.6",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2"
   },
   "engines": {
-    "node": "~0.10.0"
+    "node": "~0.12.0"
   }
 }
