@@ -1,1 +1,2 @@
-source "https://rubygems.org" gem "pass"
+source "https://rubygems.org" 
+gem "sass"
