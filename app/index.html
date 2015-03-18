@@ -26,7 +26,7 @@
     <flatiron-director route="{{route}}" autoHash></flatiron-director>
 
     <core-scaffold id="scaffold">
-      <core-header-panel navigation flex>
+      <core-header-panel navigation flex layout vertical>
         <core-toolbar>{{menuName}}</core-toolbar>
         <core-menu valueattr="hash" selected="{{route}}" selectedModel="{{selectedPage}}"
                  on-core-select="{{menuItemSelected}}">
@@ -37,7 +37,7 @@
               </paper-item>
             </template>
         </core-menu>
-
+        <polymer-github-card user="fjroa" end></polymer-github-card>
       </core-header-panel>
 
       <!-- Main Toolbar -->

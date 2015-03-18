@@ -22,3 +22,16 @@
 paper-slider {
   width: 100%;
 }
+
+    paper-button.colored {
+      color: #4285f4;
+    }
+
+    #newFichaButton {
+      background: #ff5722;
+      color: #fafafa;
+    }
+
+    #newFichaButton core-icon {
+      margin-right: 6px;
+    }

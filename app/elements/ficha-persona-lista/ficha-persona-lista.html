@@ -3,16 +3,31 @@
 <link rel="import" href="../ficha-detalle/ficha-detalle.html">
 <link rel="import" href="../../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
-
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 <polymer-element name="ficha-persona-lista" attributes="num">
   <template>
    <link rel="stylesheet" href="ficha-persona-lista.css">
    <!-- <ficha-service id="service" fichas="{{fichas}}"></ficha-service>-->
-   <section class="green-slider">      
+   <section class="green-slider"> 
+       <div layout horizontal>
         <div>
           <span>Número de Fichas </span><span id="numFichasLabel"></span>
         </div>
-        <br>
+       <div flex></div>
+        <paper-button on-click="{{newFicha}}" id="newFichaButton" raised>
+            <core-icon icon="add-box"></core-icon>Nueva Ficha</paper-button> 
+        <paper-button on-click="{{comboTon}}" id="newFichaButton" raised>
+            <core-icon icon="view-list"></core-icon>Combotón</paper-button> 
+           <paper-dialog id="dialogTroll" heading="NO SEAS AGONÍAS">
+               Esta función no se va a implementar nunca, así que deja de intentarlo muchacho.
+           </paper-dialog>
+           <paper-dialog id="dialogTroll2" heading="BLOQUEADO POR COPYRIGHT DE IÑAKI">
+               Debido a la patente del combotón, no podemos ofrecerle el 10% de la funcionalidad que teniamos pactado.
+               <br>
+               Larga vida al combotón
+           </paper-dialog>
+       </div>
        <paper-slider id="numFichas" pin snaps max="100" step="1" value="{{num}}"></paper-slider>  
    </section>
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
@@ -97,6 +112,12 @@
 
        selectedFicha: null,
 
+       newFicha: function(){
+           this.$.dialogTroll.toggle();
+       },
+       comboTon: function(){
+           this.$.dialogTroll2.toggle();
+       },
        transition: function(e) {
         if (this.page === 0 && e.target.templateInstance.model.ficha) {
           this.selectedFicha = e.target.templateInstance.model.ficha;

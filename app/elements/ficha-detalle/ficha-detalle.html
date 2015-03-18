@@ -56,6 +56,9 @@
               <paper-shadow z="1">
                <paper-icon-button icon="create" title="Editar" style="color:grey" on-click="{{edit}}"></paper-icon-button>
              </paper-shadow>
+             <paper-shadow z="1">
+               <paper-icon-button icon="save" title="Guardar" style="color:grey" hidden?="{{!editar}}" on-click="{{save}}"></paper-icon-button>
+             </paper-shadow>    
            </div>
 </div>
     <content></content>
@@ -84,6 +87,9 @@
             e.target.style.color ="orange";
             this.$.paperForm.style.backgroundColor ="white"; 
           }
+        },
+        save: function(e) {
+            this.fire('saved', {ficha: this.ficha});
         },
         mostrarCamara: function(e) {
           this.cameraVisible = true;
