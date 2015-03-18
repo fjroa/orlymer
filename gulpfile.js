@@ -223,6 +223,15 @@ gulp.task('default', ['clean'], function (cb) {
     cb);
 });
 
+gulp.task('build', ['clean'], function (cb) {
+  runSequence(
+    ['copy', 'styles'],
+    'elements',
+    ['jshint', 'images', 'fonts', 'html'],
+    'vulcanize',
+    cb);
+});
+
 // Run PageSpeed Insights
 // Update `url` below to the public URL for your site
 gulp.task('pagespeed', function (cb) {
