@@ -26,8 +26,8 @@
     <flatiron-director route="{{route}}" autoHash></flatiron-director>
 
     <core-scaffold id="scaffold">
-      <core-header-panel navigation flex layout vertical>
-        <core-toolbar>{{menuName}}</core-toolbar>
+      <core-header-panel navigation flex>
+        <core-toolbar id="navheader"><span>{{menuName}}</span></core-toolbar>
         <core-menu valueattr="hash" selected="{{route}}" selectedModel="{{selectedPage}}"
                  on-core-select="{{menuItemSelected}}">
             <template repeat="{{page, i in pages}}">
@@ -41,10 +41,12 @@
       </core-header-panel>
 
       <!-- Main Toolbar -->
-        <span tool>
-            <div flex>{{selectedPage.page.name}}</div>
-            <paper-shadow z="1" fit></paper-shadow>
-        </span>
+
+            <span tool>
+                <paper-shadow z="1"></paper-shadow>
+                {{selectedPage.page.name}}           
+            </span>
+       
         <!-- Main Content -->
         <div class="content">
             <core-pages id="pages" selected="{{route}}" valueattr="hash">

@@ -16,7 +16,7 @@ core-toolbar {
 }
 
 /* content of the left panel */
-core-header-panel {
+#navheader {
     background: #616161;
     color: #fafafa;
 }
@@ -52,7 +52,7 @@ core-header-panel > polymer-github-card {
 
 paper-item a {
   text-decoration: none;
-  color: #fafafa;
+  color: #333;
   margin-left: 5px;
 }
 
@@ -71,4 +71,14 @@ paper-button.captura {
 paper-button[raised].captura {
  background: #4285f4;
  color: #fff;
+}
+
+polymer-github-card {
+    width: auto;
+}
+
+@media screen and (max-width: 600px) {
+    polymer-github-card {
+        display: none;
+    }
 }
