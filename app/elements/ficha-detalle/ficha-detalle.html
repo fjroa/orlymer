@@ -69,29 +69,29 @@
         // define element prototype here
         editar: false,
         cameraVisible: false,
-        close: function(e) {
+        close: function() {
           this.page = 0;
           this.cameraVisible = false;
           if (this.editar) {
               this.edit();
-          };
+          }
         },
         edit: function(e) {
           if (this.editar) {
             this.editar = false;
-            e.target.style.color="grey";
-            this.$.paperForm.style.backgroundColor = "whitesmoke";  
+            e.target.style.color='grey';
+            this.$.paperForm.style.backgroundColor = 'whitesmoke';  
             this.cameraVisible = false;
           } else {
             this.editar = true;
-            e.target.style.color ="orange";
-            this.$.paperForm.style.backgroundColor ="white"; 
+            e.target.style.color ='orange';
+            this.$.paperForm.style.backgroundColor ='white'; 
           }
         },
-        save: function(e) {
+        save: function() {
             this.fire('saved', {ficha: this.ficha});
         },
-        mostrarCamara: function(e) {
+        mostrarCamara: function() {
           this.cameraVisible = true;
         },
         ready : function() {

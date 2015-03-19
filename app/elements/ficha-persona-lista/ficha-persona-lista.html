@@ -58,7 +58,7 @@
      Polymer({
         ready: function() {
             var data = [];
-            faker.locale = "es";
+            faker.locale = 'es';
             for(var i = 0; i < this.num; i++) {
                 data.push({
                     nombre: faker.name.firstName(),
@@ -74,7 +74,6 @@
 
             this.addEventListener('drag-start', function(e) {
               var dragInfo = e.detail;
-              // flaw #2: e vs dragInfo.event
               while (e.detail.avatar.firstChild) {
                   e.detail.avatar.removeChild(e.detail.avatar.firstChild);
               }
@@ -83,11 +82,12 @@
               var ficha = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
               d.innerHTML = ficha.nombre + ' ' + ficha.apellido1 + ' ' + ficha.apellido2;
               e.detail.avatar.appendChild(d);
-              dragInfo.drag = function() {this.showDrag = false};
+              dragInfo.drag = function(){
+                  this.showDrag = false;};
               dragInfo.drop = this.dropFunction;
             });
             
-            this.addEventListener('core-change', function(e) {
+            this.addEventListener('core-change', function() {
                 this.$.numFichasLabel.innerHTML = this.$.numFichas.value;
                 if (this.$.numFichas.value <= this.fichas.length) {
                   while (this.fichas.length > this.$.numFichas.value) {
@@ -109,9 +109,9 @@
                 this.num = this.$.numFichas.value;
             });
         },
-
+     
        selectedFicha: null,
-
+       showDrag: true,
        newFicha: function(){
            this.$.dialogTroll.toggle();
        },
@@ -124,7 +124,7 @@
           this.page = 1;
         }},
 
-        showDrag: true,
+
 
         dropFunction : function(dragInfo) {
            showDrag = true;
