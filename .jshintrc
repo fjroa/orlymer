@@ -19,7 +19,6 @@
     "Polymer": true,
     "faker": true,
     "showDrag": true,
-    "Router": true,
     "Platform": true
   }
 }

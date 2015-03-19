@@ -7,7 +7,8 @@
     "polymer": "Polymer/polymer#^0.5.5",
     "Faker": "~2.1.2",
     "cam-snap": "divshot/cam-snap#master",
-    "polymer-github-card": "~0.0.1"
+    "polymer-github-card": "~0.0.1",
+    "app-router": "~2.6.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.2.3"

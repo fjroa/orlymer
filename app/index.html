@@ -4,79 +4,93 @@
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Orlymer</title>
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+    
   <!-- build:css /styles/main.css -->
-  <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/main.css">
   <!-- endbuild-->
   <!-- build:js /bower_components/webcomponentsjs/webcomponents.min.js -->
   <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
   <!-- endbuild -->
-  <!-- will be replaced with /elements/elements.vulcanized.html -->
+  <!-- will be replaced with /elements/elements.vulcanized.html -->  
   <link rel="import" href="/elements/elements.html">
   <!-- endreplace-->
 </head>
 
-<body unresolved fullbleed layout vertical>
-  <template is="auto-binding" id="app">
+<body unresolved fullbleed>
+    
+  <polymer-element name="sidebar-layout" attributes="selected" noscript>
 
-    <!-- Route controller. -->
-    <flatiron-director route="{{route}}" autoHash></flatiron-director>
+      <template>
+        <!-- build:css /styles/main.css -->
+        <link rel="stylesheet" href="/styles/main.css">
+        <!-- endbuild-->
+        <core-scaffold>
+          <core-header-panel navigation flex mode="seamed">
+            <core-toolbar id="navheader"><span>Orlymer</span></core-toolbar>
+            <core-item icon="home" label="Home" active?="{{selected == 'home'}}"><a is="pushstate-anchor" href="#/"></a></core-item>
+          <core-item icon="label" label="Fichas" active?="{{selected == 'fichas'}}"><a is="pushstate-anchor" href="#/fichas"></a></core-item>
+          <core-item icon="image:camera" label="Camara" active?="{{selected == 'camara'}}"><a is="pushstate-anchor" href="#/camara"></a></core-item>  
+            <polymer-github-card user="fjroa" end></polymer-github-card>
+          </core-header-panel>
 
-    <core-scaffold id="scaffold">
-      <core-header-panel navigation flex>
-        <core-toolbar id="navheader"><span>{{menuName}}</span></core-toolbar>
-        <core-menu valueattr="hash" selected="{{route}}" selectedModel="{{selectedPage}}"
-                 on-core-select="{{menuItemSelected}}">
-            <template repeat="{{page, i in pages}}">
-              <paper-item hash="{{page.hash}}" noink>
-                <core-icon icon="label{{route != page.hash ? '-outline' : ''}}"></core-icon>
-                <a href="#{{page.hash}}">{{page.name}}</a>
-              </paper-item>
-            </template>
-        </core-menu>
-        <polymer-github-card user="fjroa" end></polymer-github-card>
-      </core-header-panel>
-
-      <!-- Main Toolbar -->
-
+          <!-- Main Toolbar -->
             <span tool>
                 <paper-shadow z="1"></paper-shadow>
-                {{selectedPage.page.name}}           
+                <content select=".title"></content>          
             </span>
-       
-        <!-- Main Content -->
-        <div class="content">
-            <core-pages id="pages" selected="{{route}}" valueattr="hash">
-                  <section hash="principal">
-                    <template repeat="{{ficha, i in fichas}}">
-                     <ficha-detalle ficha="{{ficha}}">
-                      <img src= '../images/535106-user_512x512.png' draggable="false">
-                     </ficha-detalle>
-                   </template>
-                  </section>
-                  <section hash="fichas">
-                    <ficha-persona-lista num="10"></ficha-persona-lista>
-                  </section>
-                  <section hash="camara" layout center>
-                       <cam-snap></cam-snap>
+            <!-- Main Content -->
+            <div class="content">
+                <content></content>
+            </div>
+        </core-scaffold>
+      </template>
+   
+  </polymer-element>
+    
+    <polymer-element name="first-page" noscript>
+        <template>
+            <sidebar-layout selected="home">
+               <div class="title">Home</div>
+                <ficha-detalle ficha="{{ficha}}">
+                    <img src= '../images/535106-user_512x512.png' draggable="false">
+                </ficha-detalle>
+            </sidebar-layout>
+        </template>
+    </polymer-element>
+
+    <polymer-element name="second-page" noscript>
+        <template>
+            <sidebar-layout selected="fichas">
+              <div class="title">Fichas</div>
+              <ficha-persona-lista num="10"></ficha-persona-lista>
+            </sidebar-layout>
+        </template>
+    </polymer-element>
+
+    <polymer-element name="third-page" attributes="pageNum" noscript>
+      <template>
+        <sidebar-layout selected="camara">
+          <div class="title">Cámara</div>
+           <cam-snap></cam-snap>
                        <div id="result">
                         <h3>Last Image</h3>
                         <img id="pic"></img>
                       </div>
-                  </section>
-            </core-pages>
-        </div>
-
-
-    </core-scaffold>
-  </template>
-
-  <!-- build:js /scripts/app.js -->
-  <script src="/scripts/app.js"></script>
-  <!-- endbuild-->
+        </sidebar-layout>
+      </template>
+    </polymer-element>
+    
+  <app-router core-animated-pages transitions="cross-fade-all" trailingSlash="ignore" mode="hash">
+    <!-- matches an exact path -->
+    <app-route path="/home" element="first-page" template></app-route>
+    <app-route path="/fichas" element="second-page" template></app-route>
+    <app-route path="/camara" element="third-page" template></app-route>
+    <app-route path="*" element="first-page" template></app-route>  
+  </app-router> 
 </body>
 
 </html>
