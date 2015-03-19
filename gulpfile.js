@@ -77,7 +77,7 @@ gulp.task('copy', function () {
     'bower_components/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
-  var elements = gulp.src(['app/elements/**/*.html'])
+  var elements = gulp.src(['app/elements/**/*.html', 'app/elements/**/*.js'])
     .pipe(gulp.dest('dist/elements'));
 
   var vulcanized = gulp.src(['app/elements/elements.html'])
@@ -93,47 +93,6 @@ gulp.task('fonts', function () {
     .pipe(gulp.dest('dist/fonts'))
     .pipe($.size({title: 'fonts'}));
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
@@ -236,18 +195,13 @@ gulp.task('build', ['clean'], function (cb) {
 // Update `url` below to the public URL for your site
 gulp.task('pagespeed', function (cb) {
   // Update the below URL to the public URL of your site
-  pagespeed.output('example.com', {
+  pagespeed.output('orlymer.herokuapp.com', {
     strategy: 'mobile',
     // By default we use the PageSpeed Insights free (no API key) tier.
     // Use a Google Developer API key if you have one: http://goo.gl/RkN0vE
     // key: 'YOUR_API_KEY'
   }, cb);
 });
-
-
-
-
-
 
 // Load custom tasks from the `tasks` directory
 try { require('require-dir')('tasks'); } catch (err) {}
