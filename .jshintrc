@@ -19,6 +19,7 @@
     "Polymer": true,
     "faker": true,
     "showDrag": true,
-    "Platform": true
+    "Platform": true,
+    "CoreStyle": true,  
   }
 }
