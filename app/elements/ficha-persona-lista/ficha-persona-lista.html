@@ -5,14 +5,25 @@
 <link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
-<polymer-element name="ficha-persona-lista" attributes="num">
+<link rel="import" href="../../../bower_components/core-style/core-style.html">
+
+<core-style id="lista-fichas">
+  ficha-persona {
+    display: inline-block;
+    height: 200px;
+    width: calc({{ 100 / g.columns }}% - 16px);
+  }
+</core-style>
+
+<polymer-element name="ficha-persona-lista" attributes="num numColums">
   <template>
    <link rel="stylesheet" href="ficha-persona-lista.css">
-   <!-- <ficha-service id="service" fichas="{{fichas}}"></ficha-service>-->
-   <section class="green-slider"> 
+   <!--SLIDER CONTENT -->
+   <section> 
        <div layout horizontal>
         <div>
-          <span>Número de Fichas </span><span id="numFichasLabel"></span>
+          <span>Número de Fichas: </span><span id="numFichasLabel"></span><br>
+          <span>Número de Columnas: </span><span id="numGridLabel"></span>
         </div>
        <div flex></div>
         <paper-button on-click="{{newFicha}}" id="newFichaButton" raised>
@@ -29,10 +40,15 @@
            </paper-dialog>
        </div>
        <paper-slider id="numFichas" pin snaps max="100" step="1" value="{{num}}"></paper-slider>  
+       <paper-slider id="numGrid" pin snaps max="8" min="1" step="1" value="{{numColums}}"></paper-slider>  
+       
    </section>
+   <!--MAIN CONTENT -->
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
-        <section>
-        <div class="ficha-container" hero-p on-tap="{{transition}}">
+       <!-- FICHAS -->
+       <section vertical center center-justified layout>
+        <core-style ref="lista-fichas"></core-style>
+        <div hero-p on-tap="{{transition}}">
           <template repeat="{{ficha in fichas}}">
               <ficha-persona drag="{{showDrag}}" hero-id="{{ficha.nombre}}-{{ficha.apellido1}}-foto" hero?="{{selectedFicha === ficha}}">
                 <img draggable="false" src="{{ficha.avatar}}">
@@ -45,18 +61,24 @@
           </template>
         </div>
         </section>
-
+       <!--FIN FICHAS -->
+       <!--DETALLE -->
        <section id="details">
           <ficha-detalle ficha="{{selectedFicha}}" hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}" hero page="{{page}}">
             <img src="{{selectedFicha.avatar}}" hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}-foto" hero>
           </ficha-detalle>
       </section>
+       <!--FIN DETALLE -->
     </core-animated-pages>
   </template>
   <script src="../../../bower_components/Faker/build/build/faker.js"></script>
   <script>
+
+      
      Polymer({
         ready: function() {
+            CoreStyle.g.columns = this.numColums;
+            
             var data = [];
             faker.locale = 'es';
             for(var i = 0; i < this.num; i++) {
@@ -71,7 +93,9 @@
                 });
             }
             this.fichas = data;
-
+            
+            CoreStyle.g.items = this.num;
+            
             this.addEventListener('drag-start', function(e) {
               var dragInfo = e.detail;
               while (e.detail.avatar.firstChild) {
@@ -107,6 +131,8 @@
                  }
                 }
                 this.num = this.$.numFichas.value;
+                
+                CoreStyle.g.columns = this.$.numGrid.value;
             });
         },
      
@@ -123,8 +149,6 @@
           this.selectedFicha = e.target.templateInstance.model.ficha;
           this.page = 1;
         }},
-
-
 
         dropFunction : function(dragInfo) {
            showDrag = true;
@@ -144,6 +168,6 @@
            fichas[idDestino].id = idDestino;
         }
     });
-      
+
   </script>
 </polymer-element>

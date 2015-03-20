@@ -7,16 +7,14 @@
 <polymer-element name="ficha-persona" attributes="query drag" noscript>
   <template>
     <link rel="stylesheet" href="ficha-persona.css">
+    <paper-icon-button self-end hidden?="{{!drag}}" class="drag-button" icon="image:transform" title="Mover">
+        <core-drag-drop></core-drag-drop>
+    </paper-icon-button>
     <div layout vertical center flex>
         <core-style></core-style>
-        <div horizontal layout>
+        <div>
             <core-image self-center
               sizing="contain" draggable="false"><content select="img"></content></core-image>
-            
-            <paper-icon-button self-stretch hidden?="{{!drag}}" icon="image:transform" title="Mover">
-                <core-drag-drop></core-drag-drop>
-            </paper-icon-button>
-
         </div>
         <div horizontal center-justified layout>
             <content select="nombre"></content>&nbsp;
@@ -28,6 +26,7 @@
             &nbsp;(&nbsp;<content select="provincia"></content>&nbsp;)
         </div>
     </div>
+
     <content></content>
 
   </template>
