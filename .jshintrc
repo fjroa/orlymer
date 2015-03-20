@@ -20,6 +20,6 @@
     "faker": true,
     "showDrag": true,
     "Platform": true,
-    "CoreStyle": true,  
+    "CoreStyle": true
   }
 }
