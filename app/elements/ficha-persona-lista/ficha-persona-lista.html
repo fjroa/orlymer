@@ -6,12 +6,25 @@
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../../bower_components/core-style/core-style.html">
+<link rel="import" href="../../../bower_components/core-resizable/core-resizable.html">
 
 <core-style id="lista-fichas">
   ficha-persona {
     display: inline-block;
-    height: 200px;
+    height: {{ g.containerHeight / (g.rows)}}px;
     width: calc({{ 100 / g.columns }}% - 16px);
+  }
+
+  ficha-persona img {
+    height: {{(g.fichaHeight * 0.7)}}px;
+  }
+    
+  ficha-persona apellido2, ficha-persona nombre, ficha-persona apellido1 {
+    font-size: 0.5rem !important;
+  }
+    
+  ficha-persona provincia, ciudad {
+    font-size: 0.5rem !important;
   }
 </core-style>
 
@@ -19,7 +32,7 @@
   <template>
    <link rel="stylesheet" href="ficha-persona-lista.css">
    <!--SLIDER CONTENT -->
-   <section> 
+   <section id="cabecera"> 
        <div layout horizontal>
         <div>
           <span>Número de Fichas: </span><span id="numFichasLabel"></span><br>
@@ -46,9 +59,9 @@
    <!--MAIN CONTENT -->
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
        <!-- FICHAS -->
-       <section vertical center center-justified layout>
+       <section vertical center center-justified wrap>
         <core-style ref="lista-fichas"></core-style>
-        <div hero-p on-tap="{{transition}}">
+        <div id="fichasContainer" hero-p on-tap="{{transition}}">
           <template repeat="{{ficha in fichas}}">
               <ficha-persona drag="{{showDrag}}" hero-id="{{ficha.nombre}}-{{ficha.apellido1}}-foto" hero?="{{selectedFicha === ficha}}">
                 <img draggable="false" src="{{ficha.avatar}}">
@@ -74,11 +87,10 @@
   <script src="../../../bower_components/Faker/build/build/faker.js"></script>
   <script>
 
-      
-     Polymer({
+    Polymer(Polymer.mixin({
         ready: function() {
             CoreStyle.g.columns = this.numColums;
-            
+            CoreStyle.g.items = this.num;
             var data = [];
             faker.locale = 'es';
             for(var i = 0; i < this.num; i++) {
@@ -94,8 +106,6 @@
             }
             this.fichas = data;
             
-            CoreStyle.g.items = this.num;
-            
             this.addEventListener('drag-start', function(e) {
               var dragInfo = e.detail;
               while (e.detail.avatar.firstChild) {
@@ -110,7 +120,10 @@
                   this.showDrag = false;};
               dragInfo.drop = this.dropFunction;
             });
-            
+                                                 
+            this.addEventListener('template-bound', function(e) {
+                e.target.g = CoreStyle.g;
+            });                                  
             this.addEventListener('core-change', function() {
                 this.$.numFichasLabel.innerHTML = this.$.numFichas.value;
                 if (this.$.numFichas.value <= this.fichas.length) {
@@ -131,8 +144,9 @@
                  }
                 }
                 this.num = this.$.numFichas.value;
-                
+                CoreStyle.g.items = this.num;
                 CoreStyle.g.columns = this.$.numGrid.value;
+                CoreStyle.g.rows = Math.ceil(CoreStyle.g.items/CoreStyle.g.columns);
             });
         },
      
@@ -166,8 +180,28 @@
            //Nuevo Destino;
            fichas[idDestino] = temp;
            fichas[idDestino].id = idDestino;
-        }
-    });
+        },
+        
+        resizeDone: function(e, detail, sender) {
+         
+      },
+      
 
+      attached: function () {
+        this.resizableAttachedHandler();
+      },
+      detached:function(){
+        this.resizableDetachedHandler();
+      },
+      eventDelegates: {
+        'core-resize': 'updateSize'
+      },
+      updateSize:function(){
+        console.log('Size updated!', document.body.clientHeight);
+        var height = document.body.clientHeight;                
+        CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 64 - (20*CoreStyle.g.rows);
+        CoreStyle.g.fichaHeight = CoreStyle.g.containerHeight /  CoreStyle.g.rows;    
+      }
+    },Polymer.CoreResizable));
   </script>
 </polymer-element>
