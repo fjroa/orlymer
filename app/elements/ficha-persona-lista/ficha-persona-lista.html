@@ -180,12 +180,7 @@
            //Nuevo Destino;
            fichas[idDestino] = temp;
            fichas[idDestino].id = idDestino;
-        },
-        
-        resizeDone: function(e, detail, sender) {
-         
-      },
-      
+        },     
 
       attached: function () {
         this.resizableAttachedHandler();
@@ -197,9 +192,8 @@
         'core-resize': 'updateSize'
       },
       updateSize:function(){
-        console.log('Size updated!', document.body.clientHeight);
         var height = document.body.clientHeight;                
-        CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 64 - (20*CoreStyle.g.rows);
+        CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 64 - (2*CoreStyle.g.rows);
         CoreStyle.g.fichaHeight = CoreStyle.g.containerHeight /  CoreStyle.g.rows;    
       }
     },Polymer.CoreResizable));
