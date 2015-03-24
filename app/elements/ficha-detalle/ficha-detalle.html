@@ -5,13 +5,22 @@
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/core-image/core-image.html">
 <link rel="import" href="../../../bower_components/cam-snap/cam-snap.html">
+<link rel="import" href="../../../bower_components/core-style/core-style.html">
+
+<core-style id="detalle-ficha">
+  #photo {
+    display: inline-block;
+    width: {{ g.formWidth*0.4 }}px;
+    z-index: 1;
+  }
+</core-style>
 
 <polymer-element name="ficha-detalle" attributes="page ficha">
  <template>
     <link rel="stylesheet" href="ficha-detalle.css">
-
+    <core-style ref="detalle-ficha"></core-style>
     <div layout center-justified horizontal>
-		<div center-justified layout vertical>
+		<div id="photo" center-justified layout vertical>
 				<core-image flex center-justified hidden?="{{cameraVisible}}" sizing="contais" preload draggable="false">
 					<content select="img"></content>
 				</core-image>
@@ -65,8 +74,7 @@
     <content></content>
   </template>
   <script>
-    (function () {
-      Polymer({
+    Polymer(Polymer.mixin({
         // define element prototype here
         editar: false,
         cameraVisible: false,
@@ -94,17 +102,31 @@
         },
         mostrarCamara: function() {
           this.cameraVisible = true;
+            
         },
         ready : function() {
           this.$.camara.addEventListener('change', function(e) {
-            if (e.detail.data) { document.querySelector('img').src = e.detail.data; 
+            if (e.detail.data) {
                                 e.target.templateInstance.model.ficha.avatar = e.detail.data; 
                                 e.target.templateInstance.model.cameraVisible = false;
                                }
           });
-        }
-      });
-    })();
+        },
+        attached: function () {
+        this.resizableAttachedHandler();
+          },
+          detached:function(){
+            this.resizableDetachedHandler();
+          },
+          eventDelegates: {
+            'core-resize': 'updateSize'
+          },
+          updateSize:function(){
+            //var height = document.body.clientHeight;                
+            //CoreStyle.g.formHeight = height - this.$.cabecera.clientHeight - 140 -(5*CoreStyle.g.rows);
+            CoreStyle.g.formWidth = this.$.paperForm.clientWidth; 
+          }
+      },Polymer.CoreResizable));
 
   </script>
 </polymer-element>

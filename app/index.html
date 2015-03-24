@@ -71,17 +71,28 @@
         </template>
     </polymer-element>
 
-    <polymer-element name="third-page" attributes="pageNum" noscript>
+    <polymer-element name="third-page" attributes="pageNum" >
       <template>
         <sidebar-layout selected="camara">
           <div class="title">Cámara</div>
-           <cam-snap></cam-snap>
-                       <div id="result">
-                        <h3>Last Image</h3>
-                        <img id="pic"></img>
-                      </div>
+            <cam-snap id="camara"></cam-snap>
+             <div id="result">
+               <h3>Last Image</h3>
+               <img id="pic"></img>
+             </div>
         </sidebar-layout>
       </template>
+      <script>
+        Polymer({
+            ready: function() {
+              this.$.camara.addEventListener('change', function(e) {
+                if (e.detail.data) { 
+                    this.templateInstance.model.$.pic.src = e.detail.data; 
+                 }
+              })
+            }
+        });
+      </script>
     </polymer-element>
     
   <app-router core-animated-pages transitions="cross-fade-all" trailingSlash="ignore" mode="hash">
