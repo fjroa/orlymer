@@ -1,7 +1,6 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../ficha-persona/ficha-persona.html">
 <link rel="import" href="../ficha-detalle/ficha-detalle.html">
-<link rel="import" href="../img-background/img-background.html">
 <link rel="import" href="../../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
@@ -13,21 +12,40 @@
 <core-style id="lista-fichas">
   ficha-persona {
     display: inline-block;
-    height: {{ g.fichaHeight}}px;
-    width: calc({{ 100 / g.columns }}% - 16px);
+    height: {{ g.fichaHeight }}px;
+    width: calc({{ 100 / g.columns }}% - 30px);
+    z-index: 1;
   }
 
   ficha-persona img {
     height: {{(g.fichaHeight * 0.7)}}px;
+    z-index: 2;
   }
     
   ficha-persona apellido2, ficha-persona nombre, ficha-persona apellido1 {
     font-size: 0.5rem !important;
+    z-index: 2;
   }
     
   ficha-persona provincia, ciudad {
     font-size: 0.5rem !important;
+    z-index: 2;
   }
+    
+  #listaBackground {
+      z-index: 0;
+      width: {{g.containerWidth + 30.829*2}}px ;
+      height: {{g.containerHeight}}px;
+      position:absolute;
+      left: -30.829px;
+      top: 0px;    
+    }
+    
+#fichasContainer {
+    overflow: hidden;
+    margin-top: 60px;
+    margin-left: 30.829px;
+}
 </core-style>
 
 <polymer-element name="ficha-persona-lista" attributes="num numColums">
@@ -63,10 +81,13 @@
    <!--MAIN CONTENT -->
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
        <!-- FICHAS -->
-       <section vertical center center-justified wrap>
-        <img-background src="../../EmptyChalkboard.svg"></img-background>
+       <section wrap>
         <core-style ref="lista-fichas"></core-style>
-        <div id="fichasContainer" hero-p on-tap="{{transition}}">
+         <svg id="listaBackground" preserveAspectRatio="none"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+                <image x="0" y="0"  preserveAspectRatio="none" height="100%" width="100%" xlink:href="../../EmptyChalkboard.svg" />
+        </svg>
+          <div id="fichasContainer" hero-p on-tap="{{transition}}">
           <template repeat="{{ficha in fichas}}">
               <ficha-persona drag="{{showDrag}}" hero-id="{{ficha.nombre}}-{{ficha.apellido1}}-foto" hero?="{{selectedFicha === ficha}}">
                 <img draggable="false" src="{{ficha.avatar}}">
@@ -201,7 +222,9 @@
       updateSize:function(){
         var height = document.body.clientHeight;                
         CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 140 -(5*CoreStyle.g.rows);
-        CoreStyle.g.fichaHeight = CoreStyle.g.containerHeight /  CoreStyle.g.rows;    
+        CoreStyle.g.containerWidth = this.$.fichasContainer.clientWidth; 
+        CoreStyle.g.fichaHeight = (CoreStyle.g.containerHeight - 140) /  CoreStyle.g.rows;    
+        this.$.listaBackground.setAttribute('viewBox', '0 0 ' + CoreStyle.g.containerWidth + ' ' + CoreStyle.g.containerHeight);
       }
     },Polymer.CoreResizable));
   </script>
