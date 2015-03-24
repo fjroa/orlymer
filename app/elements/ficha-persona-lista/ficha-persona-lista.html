@@ -1,17 +1,19 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../ficha-persona/ficha-persona.html">
 <link rel="import" href="../ficha-detalle/ficha-detalle.html">
+<link rel="import" href="../img-background/img-background.html">
 <link rel="import" href="../../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../../bower_components/core-style/core-style.html">
 <link rel="import" href="../../../bower_components/core-resizable/core-resizable.html">
+<link rel="import" href="../../../bower_components/core-collapse/core-collapse.html">
 
 <core-style id="lista-fichas">
   ficha-persona {
     display: inline-block;
-    height: {{ g.containerHeight / (g.rows)}}px;
+    height: {{ g.fichaHeight}}px;
     width: calc({{ 100 / g.columns }}% - 16px);
   }
 
@@ -32,7 +34,9 @@
   <template>
    <link rel="stylesheet" href="ficha-persona-lista.css">
    <!--SLIDER CONTENT -->
-   <section id="cabecera"> 
+    <core-icon-button id="menuButton" icon="menu" on-tap="{{ toggle }}"></core-icon-button>
+    <core-collapse id="collapse">
+   <section id="cabecera">    
        <div layout horizontal>
         <div>
           <span>Número de Fichas: </span><span id="numFichasLabel"></span><br>
@@ -53,13 +57,14 @@
            </paper-dialog>
        </div>
        <paper-slider id="numFichas" pin snaps max="100" step="1" value="{{num}}"></paper-slider>  
-       <paper-slider id="numGrid" pin snaps max="8" min="1" step="1" value="{{numColums}}"></paper-slider>  
-       
+       <paper-slider id="numGrid" pin snaps max="8" min="1" step="1" value="{{numColums}}"></paper-slider>      
    </section>
+   </core-collapse>
    <!--MAIN CONTENT -->
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
        <!-- FICHAS -->
        <section vertical center center-justified wrap>
+        <img-background src="../../EmptyChalkboard.svg"></img-background>
         <core-style ref="lista-fichas"></core-style>
         <div id="fichasContainer" hero-p on-tap="{{transition}}">
           <template repeat="{{ficha in fichas}}">
@@ -181,7 +186,9 @@
            fichas[idDestino] = temp;
            fichas[idDestino].id = idDestino;
         },     
-
+        toggle: function() {
+          this.$.collapse.toggle();
+        },
       attached: function () {
         this.resizableAttachedHandler();
       },
@@ -193,7 +200,7 @@
       },
       updateSize:function(){
         var height = document.body.clientHeight;                
-        CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 64 - (2*CoreStyle.g.rows);
+        CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 140 -(5*CoreStyle.g.rows);
         CoreStyle.g.fichaHeight = CoreStyle.g.containerHeight /  CoreStyle.g.rows;    
       }
     },Polymer.CoreResizable));
