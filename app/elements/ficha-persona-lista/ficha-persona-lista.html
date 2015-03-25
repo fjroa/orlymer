@@ -1,93 +1,31 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../ficha-persona/ficha-persona.html">
-<link rel="import" href="../ficha-detalle/ficha-detalle.html">
 <link rel="import" href="../../../bower_components/core-animated-pages/core-animated-pages.html">
-<link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
-<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../../bower_components/core-style/core-style.html">
 <link rel="import" href="../../../bower_components/core-resizable/core-resizable.html">
-<link rel="import" href="../../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../ficha-persona/ficha-persona.html">
+<link rel="import" href="../ficha-detalle/ficha-detalle.html">
+<link rel="import" href="ficha-persona-lista-menu.html">
+<link rel="import" href="fichas-styles.html">
 
-<core-style id="lista-fichas">
-  ficha-persona {
-    display: inline-block;
-    height: {{ g.fichaHeight }}px;
-    width: calc({{ 100 / g.columns }}% - 30px);
-    z-index: 1;
-  }
-
-  ficha-persona img {
-    height: {{(g.fichaHeight * 0.7)}}px;
-    z-index: 2;
-  }
-    
-  ficha-persona apellido2, ficha-persona nombre, ficha-persona apellido1 {
-    font-size: 0.5rem !important;
-    z-index: 2;
-  }
-    
-  ficha-persona provincia, ciudad {
-    font-size: 0.5rem !important;
-    z-index: 2;
-  }
-    
-  #listaBackground {
-      z-index: 0;
-      width: {{g.containerWidth + 30.829*2}}px ;
-      height: {{g.containerHeight}}px;
-      position:absolute;
-      left: -30.829px;
-      top: 0px;    
-    }
-    
-#fichasContainer {
-    overflow: hidden;
-    margin-top: 60px;
-    margin-left: 30.829px;
-}
-</core-style>
-
-<polymer-element name="ficha-persona-lista" attributes="num numColums">
+<polymer-element name="ficha-persona-lista" attributes="num numColums theme">
   <template>
-   <link rel="stylesheet" href="ficha-persona-lista.css">
-   <!--SLIDER CONTENT -->
-    <core-icon-button id="menuButton" icon="menu" on-tap="{{ toggle }}"></core-icon-button>
-    <core-collapse id="collapse">
-   <section id="cabecera">    
-       <div layout horizontal>
-        <div>
-          <span>Número de Fichas: </span><span id="numFichasLabel"></span><br>
-          <span>Número de Columnas: </span><span id="numGridLabel"></span>
-        </div>
-       <div flex></div>
-        <paper-button on-click="{{newFicha}}" id="newFichaButton" raised>
-            <core-icon icon="add-box"></core-icon>Nueva Ficha</paper-button> 
-        <paper-button on-click="{{comboTon}}" id="newFichaButton" raised>
-            <core-icon icon="view-list"></core-icon>Combotón</paper-button> 
-           <paper-dialog id="dialogTroll" heading="NO SEAS AGONÍAS">
-               Esta función no se va a implementar nunca, así que deja de intentarlo muchacho.
-           </paper-dialog>
-           <paper-dialog id="dialogTroll2" heading="BLOQUEADO POR COPYRIGHT DE IÑAKI">
-               Debido a la patente del combotón, no podemos ofrecerle el 10% de la funcionalidad que teniamos pactado.
-               <br>
-               Larga vida al combotón
-           </paper-dialog>
-       </div>
-       <paper-slider id="numFichas" pin snaps max="100" step="1" value="{{num}}"></paper-slider>  
-       <paper-slider id="numGrid" pin snaps max="8" min="1" step="1" value="{{numColums}}"></paper-slider>      
-   </section>
-   </core-collapse>
-   <!--MAIN CONTENT -->
+   <!-- Menu -->
+   <ficha-persona-lista-menu id="cabecera" num="{{num}}" numColums="{{numColums}}" theme="{{theme}}"></ficha-persona-lista-menu>
+      
+   <!-- Main -->      
    <core-animated-pages selected="{{page}}" transitions="hero-transition" on-core-animated-pages-transition-end="{{complete}}">
-       <!-- FICHAS -->
        <section wrap>
+           
+        <!-- Importar Style -->
         <core-style ref="lista-fichas"></core-style>
-         <svg id="listaBackground" preserveAspectRatio="none"
-             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-                <image x="0" y="0"  preserveAspectRatio="none" height="100%" width="100%" xlink:href="../../EmptyChalkboard.svg" />
-        </svg>
-          <div id="fichasContainer" hero-p on-tap="{{transition}}">
+           
+         <!-- Imagen Fondo -->
+         <svg id="listaBackground"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+                <image x="0" y="0"  id="listaBackgroundImage" preserveAspectRatio="none" height="100%" width="100%"/>
+         </svg>
+           
+        <!-- FICHAS -->
+        <div id="fichasContainer" hero-p on-tap="{{transition}}">
           <template repeat="{{ficha in fichas}}">
               <ficha-persona drag="{{showDrag}}" hero-id="{{ficha.nombre}}-{{ficha.apellido1}}-foto" hero?="{{selectedFicha === ficha}}">
                 <img draggable="false" src="{{ficha.avatar}}">
@@ -99,8 +37,9 @@
               </ficha-persona>
           </template>
         </div>
+        <!--FIN FICHAS -->
         </section>
-       <!--FIN FICHAS -->
+
        <!--DETALLE -->
        <section id="details">
           <ficha-detalle ficha="{{selectedFicha}}" hero-id="{{selectedFicha.nombre}}-{{selectedFicha.apellido1}}" hero page="{{page}}">
@@ -109,123 +48,7 @@
       </section>
        <!--FIN DETALLE -->
     </core-animated-pages>
-  </template>
-  <script src="../../../bower_components/Faker/build/build/faker.js"></script>
-  <script>
-
-    Polymer(Polymer.mixin({
-        ready: function() {
-            CoreStyle.g.columns = this.numColums;
-            CoreStyle.g.items = this.num;
-            var data = [];
-            faker.locale = 'es';
-            for(var i = 0; i < this.num; i++) {
-                data.push({
-                    nombre: faker.name.firstName(),
-                    apellido1: faker.name.lastName(),
-                    apellido2: faker.name.lastName(),
-                    avatar: faker.image.avatar(),
-                    ciudad: faker.address.city(),
-                    provincia: faker.address.state(),
-                    id : i
-                });
-            }
-            this.fichas = data;
-            
-            this.addEventListener('drag-start', function(e) {
-              var dragInfo = e.detail;
-              while (e.detail.avatar.firstChild) {
-                  e.detail.avatar.removeChild(e.detail.avatar.firstChild);
-              }
-              dragInfo.avatar.style.cssText = 'padding:10px; border: 3px solid #FFF; width: 50px; height: 50px; border-radius: 50px; background-color: whitesmoke';
-              var d = document.createElement('div');
-              var ficha = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
-              d.innerHTML = ficha.nombre + ' ' + ficha.apellido1 + ' ' + ficha.apellido2;
-              e.detail.avatar.appendChild(d);
-              dragInfo.drag = function(){
-                  this.showDrag = false;};
-              dragInfo.drop = this.dropFunction;
-            });
-                                                 
-            this.addEventListener('template-bound', function(e) {
-                e.target.g = CoreStyle.g;
-            });                                  
-            this.addEventListener('core-change', function() {
-                this.$.numFichasLabel.innerHTML = this.$.numFichas.value;
-                if (this.$.numFichas.value <= this.fichas.length) {
-                  while (this.fichas.length > this.$.numFichas.value) {
-                      this.fichas.pop();
-                  }
-                } else {
-                 for (var i = this.fichas.length; i < this.$.numFichas.value; i++) {
-                        this.fichas.push({
-                        nombre: faker.name.firstName(),
-                        apellido1: faker.name.lastName(),
-                        apellido2: faker.name.lastName(),
-                        avatar: faker.image.avatar(),
-                        ciudad: faker.address.city(),
-                        provincia: faker.address.state(),
-                        id : i
-                    });
-                 }
-                }
-                this.num = this.$.numFichas.value;
-                CoreStyle.g.items = this.num;
-                CoreStyle.g.columns = this.$.numGrid.value;
-                CoreStyle.g.rows = Math.ceil(CoreStyle.g.items/CoreStyle.g.columns);
-            });
-        },
-     
-       selectedFicha: null,
-       showDrag: true,
-       newFicha: function(){
-           this.$.dialogTroll.toggle();
-       },
-       comboTon: function(){
-           this.$.dialogTroll2.toggle();
-       },
-       transition: function(e) {
-        if (this.page === 0 && e.target.templateInstance.model.ficha) {
-          this.selectedFicha = e.target.templateInstance.model.ficha;
-          this.page = 1;
-        }},
-
-        dropFunction : function(dragInfo) {
-           showDrag = true;
-           var fichas = dragInfo.event.target.templateInstance.model.templateInstance.model.fichas;
-           var fichaOrigen = dragInfo.event.target.templateInstance.model.templateInstance.model.ficha;
-           var fichaDestino = dragInfo.event.relatedTarget.templateInstance.model.ficha;
-
-           var idDestino = fichaDestino.id;
-           var idOrigen = fichaOrigen.id;
-
-           var temp = fichas[fichaOrigen.id];
-            //Nuevo Origen
-           fichas[idOrigen] = fichas[fichaDestino.id];
-           fichas[idOrigen].id = idOrigen;
-           //Nuevo Destino;
-           fichas[idDestino] = temp;
-           fichas[idDestino].id = idDestino;
-        },     
-        toggle: function() {
-          this.$.collapse.toggle();
-        },
-      attached: function () {
-        this.resizableAttachedHandler();
-      },
-      detached:function(){
-        this.resizableDetachedHandler();
-      },
-      eventDelegates: {
-        'core-resize': 'updateSize'
-      },
-      updateSize:function(){
-        var height = document.body.clientHeight;                
-        CoreStyle.g.containerHeight = height - this.$.cabecera.clientHeight - 140 -(5*CoreStyle.g.rows);
-        CoreStyle.g.containerWidth = this.$.fichasContainer.clientWidth; 
-        CoreStyle.g.fichaHeight = (CoreStyle.g.containerHeight - 140) /  CoreStyle.g.rows;    
-        this.$.listaBackground.setAttribute('viewBox', '0 0 ' + CoreStyle.g.containerWidth + ' ' + CoreStyle.g.containerHeight);
-      }
-    },Polymer.CoreResizable));
-  </script>
+ </template>
+ <script src="../../../bower_components/Faker/build/build/faker.js"></script>
+ <script src="ficha-persona-lista.js"></script>
 </polymer-element>

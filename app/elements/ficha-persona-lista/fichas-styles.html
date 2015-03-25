@@ -1,0 +1,50 @@
+<link rel="import" href="../../../../bower_components/core-style/core-style.html">
+
+<core-style id="lista-fichas">
+        :host {
+          display: block;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+          color:black;
+          resize:both;
+        }
+    
+      ficha-persona {
+        display: inline-block;
+        height: {{ g.fichaHeight }}px;
+        width: calc({{ 100 / g.columns }}% - 30px);
+        z-index: 1;
+        background: none;
+      }
+
+      ficha-persona img {
+        height: {{(g.fichaHeight * 0.7)}}px;
+        z-index: 2;
+      }
+
+      ficha-persona apellido2, ficha-persona nombre, ficha-persona apellido1 {
+        font-size: 0.5rem !important;
+        z-index: 2;
+      }
+
+      ficha-persona provincia, ciudad {
+        font-size: 0.5rem !important;
+        z-index: 2;
+      }
+
+      #listaBackground {
+          z-index: 0;
+          width: {{g.containerWidth + 30.829*2}}px ;
+          height: {{g.containerHeight}}px;
+          position:absolute;
+          left: -30.829px;
+          top: 0px;    
+        }
+
+    #fichasContainer {
+        overflow: hidden;
+        margin-top: 60px;
+        margin-left: 30.829px;
+    }
+</core-style>

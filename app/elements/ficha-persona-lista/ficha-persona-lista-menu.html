@@ -1,0 +1,76 @@
+<link rel="import" href="../../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+
+<polymer-element name="ficha-persona-lista-menu" attributes="num numColums theme">
+    <template>
+           <link rel="stylesheet" href="ficha-persona-lista.css">
+           <core-icon-button icon="menu" on-tap="{{ toggle }}"></core-icon-button>
+           <core-collapse id="collapse">
+               <section>    
+                   <div layout horizontal>
+                     <paper-dropdown-menu label="Seleccione un Fondo">
+                        <paper-dropdown class="dropdown">
+                          <core-menu id="fondoMenu" selected="{{selectedTheme}}">
+                            <template repeat="{{aux in themes}}">
+                              <paper-item value="{{aux.value}}" on-click="{{fondoSelect}}">{{aux.label}}</paper-item>
+                            </template>                           
+                          </core-menu>
+                        </paper-dropdown>
+                      </paper-dropdown-menu>
+                   <div flex></div>
+                    <paper-button on-click="{{newFicha}}" id="newFichaButton" raised>
+                        <core-icon icon="add-box"></core-icon>Nueva Ficha</paper-button> 
+                    <paper-button on-click="{{comboTon}}" id="newFichaButton" raised>
+                        <core-icon icon="view-list"></core-icon>Combotón</paper-button> 
+                       <paper-dialog id="dialogTroll" heading="NO SEAS AGONÍAS">
+                           Esta función no se va a implementar nunca, así que deja de intentarlo muchacho.
+                       </paper-dialog>
+                       <paper-dialog id="dialogTroll2" heading="BLOQUEADO POR COPYRIGHT DE IÑAKI">
+                           Debido a la patente del combotón, no podemos ofrecerle el 10% de la funcionalidad que teniamos pactado.
+                           <br>
+                           Larga vida al combotón
+                       </paper-dialog>
+                   </div>
+                   <span>Número de Fichas: </span>
+                   <paper-slider id="numFichas" pin snaps max="30" step="1" value="{{num}}"></paper-slider>  
+                   <span>Número de Columnas: </span> 
+                   <paper-slider id="numGrid" pin snaps max="8" min="1" step="1" value="{{numColums}}"></paper-slider>      
+               </section>
+           </core-collapse>
+    </template>
+    <script>
+    Polymer({
+       ready : function(){
+            this.themes = [
+                {
+                 'value':'pizarra', 
+                 'label':'Pizarra',
+                },{                    
+                 'value':'underglow',
+                 'label':'Colores'
+                },
+                {                    
+                 'value':'sinFondo',
+                 'label':'Ninguno'
+                }];
+           this.$.fondoMenu.selected='pizarra';
+       },
+       newFicha: function(){
+           this.$.dialogTroll.toggle();
+       },
+       comboTon: function(){
+           this.$.dialogTroll2.toggle();
+       },
+        toggle: function() {
+          this.$.collapse.toggle();
+       },
+        fondoSelect: function(e) {
+          this.theme = e.target.getAttribute('value');
+        }       
+    });
+    </script>
+</polymer-element>
